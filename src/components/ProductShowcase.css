@@ -35,6 +35,13 @@
   padding-bottom: 8px;
 }
 
+.showcase__logo {
+  display: block;
+  width: auto;
+  height: clamp(36px, 5vw, 52px);
+  margin-bottom: 24px;
+}
+
 .showcase__eyebrow {
   font-size: var(--fs-small);
   letter-spacing: 0.18em;

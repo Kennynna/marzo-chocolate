@@ -44,6 +44,21 @@ export async function preloadFrames(
   return frames
 }
 
+/** Одна очередь: Hero → gifts, без гонки за сеть. */
+let framePreloadQueue: Promise<unknown> = Promise.resolve()
+
+export function enqueueFramePreload(
+  sequence: FrameSequence,
+  onProgress?: (loaded: number, total: number) => void,
+): Promise<HTMLImageElement[]> {
+  const run = framePreloadQueue.then(() => preloadFrames(sequence, onProgress))
+  framePreloadQueue = run.then(
+    () => undefined,
+    () => undefined,
+  )
+  return run
+}
+
 function paintFrameCover(
   ctx: CanvasRenderingContext2D,
   img: HTMLImageElement,

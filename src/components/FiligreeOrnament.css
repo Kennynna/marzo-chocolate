@@ -1,0 +1,55 @@
+.filigree {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 120px;
+  padding: 36px 24px;
+  background: var(--color-forest);
+  color: var(--color-gold);
+  pointer-events: none;
+}
+
+.filigree__svg {
+  width: min(640px, 88vw);
+  height: auto;
+  overflow: visible;
+}
+
+.filigree__path {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill-opacity: 1;
+}
+
+.filigree--static .filigree__path {
+  fill-opacity: 1;
+  stroke-opacity: 0;
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+}
+
+.filigree--cocoa {
+  background: var(--color-cream);
+  color: var(--color-cocoa);
+}
+
+.filigree--on-dark {
+  background: var(--color-forest);
+  color: var(--color-gold);
+}
+
+.filigree--in-showcase {
+  justify-content: flex-start;
+  background: transparent;
+  min-height: 0;
+  padding: 0 0 28px;
+  color: var(--color-cocoa);
+}
+
+.filigree--in-showcase .filigree__svg {
+  width: min(420px, 70vw);
+}

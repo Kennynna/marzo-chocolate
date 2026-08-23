@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 110" fill="none" aria-hidden="true">
+  <!-- >4C;L=K9 >@=0<5=B: F5=B@ + 75@:0;L=K5 ?>;>28=K. ;0AAK 4;O GSAP draw. -->
+  <g class="filigree-center" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+    <path class="filigree-path" pathLength="100" d="M400 14 C408 32 410 48 406 62 C404 72 400 82 400 90 C400 82 396 72 394 62 C390 48 392 32 400 14 Z"/>
+    <path class="filigree-path" pathLength="100" d="M400 58 C388 48 380 54 384 64 C390 70 396 66 400 58 Z"/>
+    <path class="filigree-path" pathLength="100" d="M400 58 C412 48 420 54 416 64 C410 70 404 66 400 58 Z"/>
+  </g>
+
+  <g id="filigree-half" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path class="filigree-path" pathLength="100" d="M8 58 C42 58 58 42 92 36 C128 28 152 54 188 58 C224 62 248 40 286 34 C318 28 348 42 372 52"/>
+    <path class="filigree-path" pathLength="100" fill="currentColor" stroke-width="1.4" d="M48 54 C56 30 78 16 102 20 C94 34 82 44 68 54 C78 40 92 34 106 36 C90 48 72 56 54 58 C62 46 74 40 88 40 C74 48 60 54 48 54 Z"/>
+    <path class="filigree-path" pathLength="100" d="M150 60 C162 46 186 42 204 54 C216 64 208 78 190 76 C172 74 160 66 150 60"/>
+    <path class="filigree-path" pathLength="100" d="M300 38 C328 14 372 16 390 40 C404 56 396 84 368 90 C336 96 310 78 302 56 C298 44 300 38 300 38"/>
+    <path class="filigree-path" pathLength="100" fill="currentColor" stroke-width="1.4" d="M328 62 C344 46 368 44 384 56 C372 64 356 70 340 72 C352 58 368 54 382 58 C366 66 348 70 332 68 C340 58 354 54 368 56 C352 62 338 64 328 62 Z"/>
+    <path class="filigree-path" pathLength="100" stroke-width="1.5" d="M388 42 C402 24 414 30 406 48"/>
+  </g>
+
+  <use href="#filigree-half" transform="translate(400 0)"/>
+  <use href="#filigree-half" transform="translate(400 0) scale(-1 1)"/>
+</svg>

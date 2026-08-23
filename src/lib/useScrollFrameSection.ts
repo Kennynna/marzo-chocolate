@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from './gsap'
+import { preloadSiteImages } from './preloadSiteImages'
 import { scheduleScrollRefresh } from './scheduleScrollRefresh'
 import {
   drawFrameBlend,
   drawFrameCover,
-  preloadFrames,
+  enqueueFramePreload,
   type FrameSequence,
 } from './scrollFrames'
 
@@ -49,18 +50,24 @@ export function useScrollFrameSection({
 
     let cancelled = false
 
-    preloadFrames(sequence, (loaded, total) => {
-      if (!cancelled) setLoadProgress(Math.round((loaded / total) * 100))
-    }).then((frames) => {
-      if (cancelled) return
-      framesRef.current = frames.filter(Boolean)
-      setReady(true)
-      setLoadProgress(100)
+    // Сначала фото секций, потом кадры — иначе картинки появляются с лагом.
+    void preloadSiteImages()
+      .then(() => {
+        if (cancelled) return undefined
+        return enqueueFramePreload(sequence, (loaded, total) => {
+          if (!cancelled) setLoadProgress(Math.round((loaded / total) * 100))
+        })
+      })
+      .then((frames) => {
+        if (cancelled || !frames) return
+        framesRef.current = frames.filter(Boolean)
+        setReady(true)
+        setLoadProgress(100)
 
-      const st = ScrollTrigger.getById(scrollTriggerId)
-      progressRef.current = st?.progress ?? 0
-      scheduleScrollRefresh()
-    })
+        const st = ScrollTrigger.getById(scrollTriggerId)
+        progressRef.current = st?.progress ?? 0
+        scheduleScrollRefresh()
+      })
 
     return () => {
       cancelled = true

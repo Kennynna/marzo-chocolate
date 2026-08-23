@@ -1,11 +1,11 @@
-import { cta, media, nav } from '../content/site'
+import { brand, cta, nav } from '../content/site'
 import './Header.css'
 
 export function Header() {
   return (
     <header className="header">
-      <a className="header__logo" href="#hero" aria-label="MARZO">
-        <img src={media.logo} alt="MARZO" />
+      <a className="header__brand" href="#hero">
+        {brand.name}
       </a>
       <nav className="header__nav">
         {nav.slice(0, 3).map((item) => (

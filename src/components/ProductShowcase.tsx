@@ -1,8 +1,9 @@
 import { useRef } from 'react'
-import { bars, collectionSection, cta, links } from '../content/site'
-import { gsap, ScrollTrigger, SplitText, useGSAP } from '../lib/gsap'
+import { bars, collectionSection, cta, links, media } from '../content/site'
+import { gsap, SplitText, useGSAP } from '../lib/gsap'
 import { scheduleScrollRefresh } from '../lib/scheduleScrollRefresh'
 import { MediaImage } from './MediaImage'
+import { FiligreeOrnament } from './FiligreeOrnament'
 import './ProductShowcase.css'
 
 export function ProductShowcase() {
@@ -18,11 +19,6 @@ export function ProductShowcase() {
 
       let split: SplitText | undefined
       let cancelled = false
-
-      bars.forEach((bar) => {
-        const img = new Image()
-        img.src = encodeURI(bar.image)
-      })
 
       const revealIntro = () => {
         if (cancelled) return
@@ -231,6 +227,8 @@ export function ProductShowcase() {
           03
         </p>
         <div className="showcase__intro-copy">
+          <img className="showcase__logo" src={media.logo} alt="MARZO" />
+          <FiligreeOrnament className="filigree--in-showcase" />
           <p className="showcase__eyebrow">коллекция</p>
           <h2 className="showcase__title">{collectionSection.title}</h2>
           <p className="showcase__lead">{collectionSection.description}</p>

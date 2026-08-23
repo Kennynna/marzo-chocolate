@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ornament — original / AI / SVG</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        margin: 0;
+        font-family: 'Tenor Sans', Georgia, serif;
+        background: #0d0d0d;
+        color: #f2efe8;
+      }
+      h1 {
+        font-weight: 400;
+        font-size: 1.1rem;
+        letter-spacing: 0.04em;
+        padding: 28px 28px 0;
+        text-transform: lowercase;
+      }
+      .grid {
+        display: grid;
+        gap: 20px;
+        padding: 28px;
+        max-width: 960px;
+      }
+      figure {
+        margin: 0;
+        padding: 28px;
+        background: #000;
+        border: 1px solid #2a2a2a;
+      }
+      figcaption {
+        margin-top: 14px;
+        opacity: 0.55;
+        font-size: 0.85rem;
+        letter-spacing: 0.03em;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .svg-wrap {
+        color: #fff;
+      }
+      .svg-wrap svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Орнамент: фото → AI → SVG</h1>
+    <div class="grid">
+      <figure>
+        <img src="./92ec7897bfda0fcf460e920b3ab12d80.jpg" alt="Оригинальное фото" />
+        <figcaption>1. Оригинальное фото</figcaption>
+      </figure>
+      <figure>
+        <img src="./ornament-ai-preview.png" alt="AI preview" />
+        <figcaption>2. AI-реконструкция (по референсу)</figcaption>
+      </figure>
+      <figure>
+        <div class="svg-wrap">
+          <img src="./ornament-filigree.svg" alt="SVG трассировка" />
+        </div>
+        <figcaption>3. SVG-трассировка — public/ornament-filigree.svg</figcaption>
+      </figure>
+    </div>
+  </body>
+</html>
