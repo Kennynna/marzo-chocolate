@@ -1,0 +1,52 @@
+/* Токены с текущей версии marzochocolate.ru, снимок 2026-08-23 */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Tenor+Sans&subset=latin,cyrillic&display=swap');
+
+:root {
+  --color-cream: #e7dfcc;
+  --color-cream-warm: #e8dfcc;
+  --color-sand: #cdc1af;
+  --color-sand-deep: #cdc2af;
+  --color-taupe: #c7ad9e;
+  --color-cocoa: #8c4a2c;
+  --color-cocoa-alt: #8c4b2d;
+  --color-cocoa-deep: #783618;
+  --color-ink: #4e3e37;
+  --color-ink-muted: #7a7066;
+  --color-olive: #3e4332;
+  --color-olive-muted: #595d4f;
+  --color-forest: #161e05;
+  --color-forest-deep: #121804;
+  --color-gold: #ecc183;
+  --color-gold-deep: #d2a769;
+  --color-white: #ffffff;
+
+  --font-display: 'Tenor Sans', Arial, sans-serif;
+  --font-body: 'Montserrat', Arial, sans-serif;
+
+  --fs-hero: 55px;
+  --fs-section: 48px;
+  --fs-card: 28px;
+  --fs-lead: 18px;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-caption: 12px;
+
+  --lh-tight: 1.15;
+  --lh-heading: 1.2;
+  --lh-body: 1.55;
+
+  --radius-pill: 50px;
+  --radius-button: 30px;
+}
+
+@media (max-width: 960px) {
+  :root {
+    --fs-hero: 40px;
+    --fs-section: 32px;
+    --fs-card: 20px;
+    --fs-lead: 14px;
+    --fs-body: 14px;
+    --fs-small: 12px;
+  }
+}
