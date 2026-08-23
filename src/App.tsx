@@ -3,6 +3,7 @@ import { Hero } from './components/Hero'
 import { Marquee } from './components/Marquee'
 import { AboutSection } from './components/AboutSection'
 import { ProductShowcase } from './components/ProductShowcase'
+import { GiftsScrollSection } from './components/GiftsScrollSection'
 import { GiftSetsSection } from './components/GiftSetsSection'
 import { PrivateLabelSection } from './components/PrivateLabelSection'
 import { DistributorsSection } from './components/DistributorsSection'
@@ -28,6 +29,7 @@ function App() {
         <DistributorsSection />
         <Marquee items={marquee.brand} variant="dark" />
         <VideoBanner />
+        <GiftsScrollSection />
       </main>
       <ContactFooter />
     </>

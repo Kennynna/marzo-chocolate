@@ -1,7 +1,0 @@
-.hero {
-  position: relative;
-  min-height: 100svh;
-  width: 100%;
-  background: var(--color-forest);
-  overflow: hidden;
-}

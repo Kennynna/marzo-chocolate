@@ -80,6 +80,8 @@
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
   gap: 56px;
   align-items: stretch;
+  contain: layout style paint;
+  backface-visibility: hidden;
 }
 
 .showcase__ghost {
@@ -108,11 +110,25 @@
   background: var(--color-sand);
   outline: 1px solid rgba(140, 74, 44, 0.15);
   outline-offset: 8px;
+  contain: strict;
+}
+
+.showcase__reveal {
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.showcase__image-wrap {
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .showcase__stage {
   position: relative;
   height: calc(100svh - 168px);
+  isolation: isolate;
 }
 
 .product-visual__img,
@@ -302,13 +318,13 @@
   }
 
   .showcase__slide,
-  .showcase__frame,
+  .showcase__reveal,
+  .showcase__image-wrap,
   .showcase__image,
   .media-image,
   .product-visual__img,
-  .showcase__copy > * {
+  .showcase__copy {
     transform: none !important;
-    clip-path: none !important;
     opacity: 1 !important;
     visibility: visible !important;
   }

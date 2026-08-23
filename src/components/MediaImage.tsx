@@ -5,9 +5,23 @@ type MediaImageProps = {
   alt: string
   className?: string
   fallback?: string
+  priority?: boolean
 }
 
-export function MediaImage({ src, alt, className, fallback }: MediaImageProps) {
+export function MediaImage({ src, alt, className, fallback, priority }: MediaImageProps) {
+  if (priority) {
+    return (
+      <img
+        className={className ?? 'media-image'}
+        src={encodeURI(src)}
+        alt={alt}
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
+      />
+    )
+  }
+
   const [current, setCurrent] = useState(fallback ?? src)
 
   useEffect(() => {

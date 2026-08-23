@@ -29,9 +29,9 @@ export const links = {
 export const media = {
   logo: '/_____.svg',
   video: '/HKo2VSkz.mp4',
-  aboutHero: '/IMG_5455 (2).JPG',
-  aboutSecondary: '/IMG_5463 (1).JPG',
-  privateLabel: '/IMG_6965.JPG',
+  aboutHero: '/IMG_5455 (2).webp',
+  aboutSecondary: '/IMG_5463 (1).webp',
+  privateLabel: '/IMG_6965.webp',
   ornaments: [
     '/element_1.png.webp',
     '/element_2.png.webp',
@@ -72,7 +72,7 @@ export const bars = [
     title: 'Молочный шоколад с цельным фундуком',
     titleEn: 'milk chocolate with funduk',
     href: '/milk-hazelnut',
-    image: '/IMG_6978.JPG',
+    image: '/IMG_6978.webp',
     ingredients:
       'сахар, масло какао, молоко сухое цельное, какао тёртое, сухая молочная сыворотка, эмульгатор лецитин соевый, порошок ванили, фундук',
   },
@@ -82,7 +82,7 @@ export const bars = [
     title: 'Молочный шоколад с дроблеными фисташками',
     titleEn: 'milk chocolate with crushed pistachios',
     href: '/milk-pistachio',
-    image: '/IMG_6966.JPG',
+    image: '/IMG_6966.webp',
     ingredients:
       'сахар, масло какао, молоко сухое цельное, сухая молочная сыворотка, эмульгатор лецитин соевый, ароматизатор натуральный ванилин, фисташка',
   },
@@ -92,7 +92,7 @@ export const bars = [
     title: 'Молочный шоколад',
     titleEn: 'milk chocolate',
     href: '/milk-chocolate',
-    image: '/IMG_6969.JPG',
+    image: '/IMG_6969.webp',
     ingredients:
       'сахар, масло какао, молоко сухое цельное, какао тёртое, молоко сухое обезжиренное, сухая молочная сыворотка, эмульгатор (лецитин соевый), порошок ванили',
   },
@@ -104,7 +104,7 @@ export const gifts = [
     number: '01',
     title: 'Ассорти ручной работы с фруктами и орехами',
     href: '/assorted-fruits-nuts',
-    image: '/IMG_6970.JPG',
+    image: '/IMG_6970.webp',
   },
   {
     id: 'special',
@@ -118,7 +118,7 @@ export const gifts = [
     number: '03',
     title: 'Мадлен',
     href: '/madlen',
-    image: '/IMG_6980.JPG',
+    image: '/IMG_6980.webp',
   },
 ] as const
 

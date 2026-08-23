@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { bars, collectionSection, cta, links } from '../content/site'
 import { gsap, ScrollTrigger, SplitText, useGSAP } from '../lib/gsap'
+import { scheduleScrollRefresh } from '../lib/scheduleScrollRefresh'
 import { MediaImage } from './MediaImage'
 import './ProductShowcase.css'
 
@@ -17,6 +18,11 @@ export function ProductShowcase() {
 
       let split: SplitText | undefined
       let cancelled = false
+
+      bars.forEach((bar) => {
+        const img = new Image()
+        img.src = encodeURI(bar.image)
+      })
 
       const revealIntro = () => {
         if (cancelled) return
@@ -54,7 +60,10 @@ export function ProductShowcase() {
       else void document.fonts.ready.then(revealIntro)
 
       if (reduced) {
-        gsap.set('.showcase__slide', { autoAlpha: 1, clearProps: 'clipPath' })
+        gsap.set('.showcase__slide', { autoAlpha: 1 })
+        gsap.set('.showcase__reveal', { yPercent: 0 })
+        gsap.set('.showcase__image-wrap', { scale: 1 })
+        gsap.set('.showcase__copy', { y: 0, opacity: 1 })
         return () => {
           cancelled = true
           split?.revert()
@@ -64,30 +73,42 @@ export function ProductShowcase() {
       const mm = gsap.matchMedia()
 
       mm.add('(min-width: 961px)', () => {
-        const pin = '.showcase__pin'
+        const pin = root.current?.querySelector('.showcase__pin')
         const slides = gsap.utils.toArray<HTMLElement>('.showcase__slide')
-        const fill = '.showcase__fill'
-        const indexEl = '.showcase__index-current'
+        const indexEl = root.current?.querySelector('.showcase__index-current')
+        const fillEl = root.current?.querySelector('.showcase__fill')
+        if (!pin || !slides.length) return
 
-        gsap.set(slides, { autoAlpha: 0 })
-        gsap.set(slides[0], { autoAlpha: 1 })
-        gsap.set(slides[0].querySelector('.showcase__frame'), {
-          clipPath: 'inset(0% 0% 0% 0%)',
+        slides.forEach((slide, index) => {
+          const reveal = slide.querySelector('.showcase__reveal')
+          const imageWrap = slide.querySelector('.showcase__image-wrap')
+          const copy = slide.querySelector('.showcase__copy')
+          if (!reveal || !imageWrap || !copy) return
+
+          if (index === 0) {
+            gsap.set(slide, { autoAlpha: 1 })
+            gsap.set(reveal, { yPercent: 0, force3D: true })
+            gsap.set(imageWrap, { scale: 1.1, force3D: true })
+            gsap.set(copy, { y: 0, opacity: 1 })
+            return
+          }
+
+          gsap.set(slide, { autoAlpha: 0 })
+          gsap.set(reveal, { yPercent: 100, force3D: true })
+          gsap.set(imageWrap, { scale: 1.08, force3D: true })
+          gsap.set(copy, { y: 20, opacity: 0 })
         })
-        slides.slice(1).forEach((slide) => {
-          gsap.set(slide.querySelector('.showcase__frame'), {
-            clipPath: 'inset(100% 0% 0% 0%)',
-          })
-        })
+
+        let lastIndex = 0
 
         const tl = gsap.timeline({
-          defaults: { ease: 'power3.inOut' },
+          defaults: { ease: 'none' },
           scrollTrigger: {
             trigger: pin,
             start: 'top top',
-            end: () => `+=${window.innerHeight * slides.length * 1.15}`,
+            end: () => `+=${window.innerHeight * slides.length * 1.1}`,
             pin: true,
-            scrub: 1,
+            scrub: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
@@ -95,46 +116,55 @@ export function ProductShowcase() {
                 slides.length - 1,
                 Math.floor(self.progress * slides.length),
               )
-              const node = root.current?.querySelector(indexEl)
-              if (node) node.textContent = bars[current].number
-              gsap.set(fill, { scaleX: Math.max(0.12, self.progress) })
+
+              if (current !== lastIndex && indexEl) {
+                lastIndex = current
+                indexEl.textContent = bars[current].number
+              }
+
+              if (fillEl instanceof HTMLElement) {
+                fillEl.style.transform = `scaleX(${Math.max(0.12, self.progress)})`
+              }
             },
           },
         })
 
         slides.forEach((slide, index) => {
-          const frame = slide.querySelector('.showcase__frame')
-          const image = slide.querySelector('.media-image')
-          const copy = slide.querySelectorAll('.showcase__copy > *')
+          const reveal = slide.querySelector('.showcase__reveal')
+          const imageWrap = slide.querySelector('.showcase__image-wrap')
+          const copy = slide.querySelector('.showcase__copy')
           const next = slides[index + 1]
-          const nextFrame = next?.querySelector('.showcase__frame')
-          const nextImage = next?.querySelector('.media-image')
+          if (!reveal || !imageWrap || !copy) return
 
           if (index === 0) {
-            tl.fromTo(image, { scale: 1.16 }, { scale: 1, duration: 1.2, ease: 'none' }, 0)
+            tl.to(imageWrap, { scale: 1, duration: 1.1 }, 0)
           }
 
-          if (!next || !nextFrame) {
-            tl.to(image, { scale: 1, duration: 0.45 })
+          if (!next) {
+            tl.to(imageWrap, { scale: 1, duration: 0.4 })
             return
           }
 
-          tl.to(frame, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1 }, '+=0.4')
-          tl.to(copy, { y: -24, autoAlpha: 0, duration: 0.55, stagger: 0.04 }, '<')
-          tl.to(slide, { autoAlpha: 0, duration: 0.2 }, '<+0.45')
-          tl.to(next, { autoAlpha: 1, duration: 0.01 }, '<')
+          const nextReveal = next.querySelector('.showcase__reveal')
+          const nextImageWrap = next.querySelector('.showcase__image-wrap')
+          const nextCopy = next.querySelector('.showcase__copy')
+          if (!nextReveal || !nextImageWrap || !nextCopy) return
+
+          const at = index === 0 ? 1.1 : '+=0.35'
+
+          tl.to(reveal, { yPercent: -100, duration: 0.95, force3D: true }, at)
+          tl.to(copy, { y: -16, opacity: 0, duration: 0.45 }, '<')
+          tl.to(slide, { autoAlpha: 0, duration: 0.15 }, '<+0.6')
+
+          tl.to(next, { autoAlpha: 1, duration: 0.15 }, '<')
           tl.fromTo(
-            nextFrame,
-            { clipPath: 'inset(100% 0% 0% 0%)' },
-            { clipPath: 'inset(0% 0% 0% 0%)', duration: 1 },
+            nextReveal,
+            { yPercent: 100, force3D: true },
+            { yPercent: 0, duration: 0.95, force3D: true },
             '<',
           )
-          tl.fromTo(nextImage, { scale: 1.2 }, { scale: 1, duration: 1.1, ease: 'none' }, '<')
-          tl.from(
-            next.querySelectorAll('.showcase__copy > *'),
-            { y: 40, autoAlpha: 0, duration: 0.7, stagger: 0.08, ease: 'power2.out' },
-            '-=0.55',
-          )
+          tl.fromTo(nextImageWrap, { scale: 1.08, force3D: true }, { scale: 1, duration: 0.95, force3D: true }, '<')
+          tl.fromTo(nextCopy, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, '<+0.25')
         })
 
         return () => {
@@ -147,13 +177,14 @@ export function ProductShowcase() {
         const cards = gsap.utils.toArray<HTMLElement>('.showcase__slide')
 
         cards.forEach((card) => {
-          const frame = card.querySelector('.showcase__frame')
-          const image = card.querySelector('.media-image')
-          const copy = card.querySelectorAll('.showcase__copy > *')
+          const reveal = card.querySelector('.showcase__reveal')
+          const imageWrap = card.querySelector('.showcase__image-wrap')
+          const copy = card.querySelector('.showcase__copy')
+          if (!reveal || !imageWrap || !copy) return
 
-          gsap.set(frame, { clipPath: 'inset(100% 0% 0% 0%)' })
-          gsap.set(image, { scale: 1.2 })
-          gsap.set(copy, { y: 28, autoAlpha: 0 })
+          gsap.set(reveal, { yPercent: 100, force3D: true })
+          gsap.set(imageWrap, { scale: 1.08, force3D: true })
+          gsap.set(copy, { y: 20, opacity: 0 })
 
           const cardTl = gsap.timeline({
             scrollTrigger: {
@@ -164,21 +195,18 @@ export function ProductShowcase() {
             },
           })
 
-          cardTl.to(frame, {
-            clipPath: 'inset(0% 0% 0% 0%)',
-            duration: 1.15,
+          cardTl.to(reveal, {
+            yPercent: 0,
+            duration: 1,
             ease: 'expo.out',
+            force3D: true,
           })
-          cardTl.to(image, { scale: 1, duration: 1.35, ease: 'power2.out' }, 0)
-          cardTl.to(
-            copy,
-            { y: 0, autoAlpha: 1, duration: 0.75, stagger: 0.08, ease: 'power3.out' },
-            0.28,
-          )
+          cardTl.to(imageWrap, { scale: 1, duration: 1.1, ease: 'power2.out', force3D: true }, 0)
+          cardTl.to(copy, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 0.22)
         })
       })
 
-      const refresh = () => ScrollTrigger.refresh()
+      const refresh = () => scheduleScrollRefresh()
       window.addEventListener('load', refresh)
       void document.fonts.ready.then(() => {
         if (!cancelled) refresh()
@@ -216,7 +244,16 @@ export function ProductShowcase() {
               <span className="showcase__ghost">{bar.number}</span>
               <div className="showcase__visual">
                 <div className="showcase__frame frame-brackets">
-                  <MediaImage className="showcase__image" src={bar.image} alt={bar.title} />
+                  <div className="showcase__reveal">
+                    <div className="showcase__image-wrap">
+                      <MediaImage
+                        className="showcase__image"
+                        src={bar.image}
+                        alt={bar.title}
+                        priority
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
