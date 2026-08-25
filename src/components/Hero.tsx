@@ -36,14 +36,6 @@ export function Hero() {
       <div className="scroll-frames__stage">
         <canvas className="scroll-frames__canvas" ref={canvasRef} aria-hidden />
         <div className="scroll-frames__shade scroll-frames__shade--hero" aria-hidden />
-        <span className="scroll-frames__watermark" aria-hidden>
-          {brand.name}
-        </span>
-
-        <div className="scroll-frames__content" ref={contentRef}>
-          <p className="scroll-frames__eyebrow">{brand.name}</p>
-          <h1 className="scroll-frames__title">{hero.title}</h1>
-        </div>
 
         {!ready && loadProgress < 100 && (
           <div className="scroll-frames__loader" aria-hidden>
