@@ -22,7 +22,7 @@
 
 .about__visual {
   position: relative;
-  min-height: 560px;
+  min-height: 640px;
 }
 
 .about__photo {
@@ -42,16 +42,26 @@
 }
 
 .about__photo--main {
-  width: 68%;
-  height: 460px;
+  width: 72%;
+  height: 420px;
 }
 
 .about__photo--secondary {
   position: absolute;
-  right: -4%;
-  bottom: -24px;
-  width: 54%;
-  height: 300px;
+  right: -2%;
+  top: 18%;
+  width: 46%;
+  height: 260px;
+  outline: 8px solid var(--color-olive);
+  outline-offset: -8px;
+}
+
+.about__photo--tertiary {
+  position: absolute;
+  left: 10%;
+  bottom: -12px;
+  width: 48%;
+  height: 220px;
   outline: 8px solid var(--color-olive);
   outline-offset: -8px;
 }
@@ -194,19 +204,28 @@
   }
 
   .about__visual {
-    min-height: 380px;
+    min-height: 520px;
   }
 
   .about__photo--main {
     width: 100%;
-    height: 300px;
+    height: 260px;
   }
 
   .about__photo--secondary {
     right: 0;
+    top: auto;
+    bottom: 120px;
+    width: 58%;
+    height: 170px;
+  }
+
+  .about__photo--tertiary {
+    left: auto;
+    right: 0;
     bottom: 0;
-    width: 62%;
-    height: 200px;
+    width: 52%;
+    height: 150px;
   }
 
   .about__features {

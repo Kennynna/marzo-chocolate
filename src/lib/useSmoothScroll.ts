@@ -2,6 +2,10 @@ import { useEffect } from 'react'
 import Lenis from 'lenis'
 import { gsap, ScrollTrigger } from './gsap'
 
+/**
+ * Lenis крутится через GSAP ticker. Без scrollerProxy —
+ * иначе ScrollTrigger.update + proxy на каждый кадр едят CPU.
+ */
 export function useSmoothScroll() {
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -9,51 +13,27 @@ export function useSmoothScroll() {
 
     const lenis = new Lenis({
       autoRaf: false,
-      duration: 1.4,
-      lerp: 0.09,
-      wheelMultiplier: 0.82,
-      touchMultiplier: 0.95,
+      duration: 1.1,
+      lerp: 0.12,
+      wheelMultiplier: 0.85,
+      touchMultiplier: 1,
       smoothWheel: true,
     })
 
-    ScrollTrigger.scrollerProxy(document.documentElement, {
-      scrollTop(value) {
-        if (arguments.length && value !== undefined) {
-          lenis.scrollTo(value, { immediate: true })
-        }
-        return lenis.scroll
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        }
-      },
-      pinType: document.documentElement.style.transform ? 'transform' : 'fixed',
-    })
-
-    ScrollTrigger.defaults({ scroller: document.documentElement })
-
     lenis.on('scroll', ScrollTrigger.update)
-
-    ScrollTrigger.addEventListener('refresh', () => {
-      lenis.resize()
-    })
 
     const onTick = (time: number) => {
       lenis.raf(time * 1000)
     }
 
     gsap.ticker.add(onTick)
-    gsap.ticker.lagSmoothing(0)
+    // без lagSmoothing(0): иначе при тяжёлом canvas копится очередь кадров
+    gsap.ticker.lagSmoothing(500, 33)
 
     requestAnimationFrame(() => ScrollTrigger.refresh())
 
     return () => {
       gsap.ticker.remove(onTick)
-      ScrollTrigger.scrollerProxy(document.documentElement, {})
       lenis.destroy()
     }
   }, [])

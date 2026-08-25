@@ -28,9 +28,11 @@ export const links = {
 
 export const media = {
   logo: '/_____.svg',
+  welcome: '/welcome.webp',
   video: '/HKo2VSkz.mp4',
-  aboutHero: '/IMG_5455 (2).webp',
-  aboutSecondary: '/IMG_5463 (1).webp',
+  aboutHero: '/dop-1.webp',
+  aboutSecondary: '/dop-2.webp',
+  aboutTertiary: '/dop-3.webp',
   privateLabel: '/IMG_6965.webp',
   ornaments: [
     '/element_1.png.webp',
@@ -48,6 +50,14 @@ export const cta = {
   order: 'сделать заказ →',
   details: 'детали +',
   createBrand: 'создать свой бренд →',
+} as const
+
+export const welcome = {
+  eyebrow: 'Грозный · Чеченская Республика',
+  title: 'Первая шоколадная фабрика в Чеченской Республике',
+  meta: ['без пальмового масла', '100% натуральный состав', 'собственное производство'],
+  caption: 'MARZO — вкус традиций',
+  scrollHint: 'листайте',
 } as const
 
 export const hero = {
@@ -72,7 +82,7 @@ export const bars = [
     title: 'Молочный шоколад с цельным фундуком',
     titleEn: 'milk chocolate with funduk',
     href: '/milk-hazelnut',
-    image: '/IMG_6978.webp',
+    image: '/vkus-1.webp',
     ingredients:
       'сахар, масло какао, молоко сухое цельное, какао тёртое, сухая молочная сыворотка, эмульгатор лецитин соевый, порошок ванили, фундук',
   },
@@ -82,7 +92,7 @@ export const bars = [
     title: 'Молочный шоколад с дроблеными фисташками',
     titleEn: 'milk chocolate with crushed pistachios',
     href: '/milk-pistachio',
-    image: '/IMG_6966.webp',
+    image: '/vkus-2.webp',
     ingredients:
       'сахар, масло какао, молоко сухое цельное, сухая молочная сыворотка, эмульгатор лецитин соевый, ароматизатор натуральный ванилин, фисташка',
   },
@@ -92,7 +102,7 @@ export const bars = [
     title: 'Молочный шоколад',
     titleEn: 'milk chocolate',
     href: '/milk-chocolate',
-    image: '/IMG_6969.webp',
+    image: '/vkus-3.webp',
     ingredients:
       'сахар, масло какао, молоко сухое цельное, какао тёртое, молоко сухое обезжиренное, сухая молочная сыворотка, эмульгатор (лецитин соевый), порошок ванили',
   },
@@ -104,21 +114,21 @@ export const gifts = [
     number: '01',
     title: 'Ассорти ручной работы с фруктами и орехами',
     href: '/assorted-fruits-nuts',
-    image: '/IMG_6970.webp',
+    image: '/pod-1.webp',
   },
   {
     id: 'special',
     number: '02',
     title: 'Спешл',
     href: '/chocolate-collection',
-    image: '/kling_20260821_IMAGE____________2122_0.png',
+    image: '/pod-2.webp',
   },
   {
     id: 'madlen',
     number: '03',
     title: 'Мадлен',
     href: '/madlen',
-    image: '/IMG_6980.webp',
+    image: '/pod-3.webp',
   },
 ] as const
 
@@ -134,6 +144,7 @@ export const collectionSection = {
 } as const
 
 export const giftsSection = {
+  zoomTitle: 'С любовью к вам',
   title: 'Подарочные наборы',
   description:
     'Для особых случаев мы создали целую линейку подарочных решений: коробки ассорти, коллекция «спешл» и нежные мадлен, которые станут прекрасным дополнением к чашке кофе или чая.',

@@ -1,5 +1,4 @@
 import { useRef } from 'react'
-import { brand, hero } from '../content/site'
 import { heroFrames } from '../lib/scrollFrames'
 import { useScrollFrameSection } from '../lib/useScrollFrameSection'
 import './ScrollFrameSection.css'
@@ -7,7 +6,6 @@ import './ScrollFrameSection.css'
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
   const hintRef = useRef<HTMLDivElement>(null)
 
   const { loadProgress, ready } = useScrollFrameSection({
@@ -15,11 +13,10 @@ export function Hero() {
     scrollTriggerId: 'hero-frames',
     sectionRef,
     canvasRef,
-    contentRef,
     hintRef,
     scrollLength: { desktop: 400, mobile: 300 },
-    scrub: 1.5,
-    zoomFrom: 1.13,
+    scrub: true,
+    zoomFrom: 1.08,
   })
 
   const reduced =

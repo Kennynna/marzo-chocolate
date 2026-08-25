@@ -1,4 +1,5 @@
 import { Header } from './components/Header'
+import { WelcomeSection } from './components/WelcomeSection'
 import { Hero } from './components/Hero'
 import { Marquee } from './components/Marquee'
 import { AboutSection } from './components/AboutSection'
@@ -19,6 +20,7 @@ function App() {
     <>
       <Header />
       <main>
+        <WelcomeSection />
         <Hero />
         <Marquee items={marquee.brand} variant="gold" />
         <AboutSection />

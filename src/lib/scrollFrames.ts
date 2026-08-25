@@ -13,6 +13,10 @@ export const giftsScrollFrames: FrameSequence = {
   getPath: (index) => `/video2-frames/frame_${String(index + 1).padStart(4, '0')}.webp`,
 }
 
+export function getLastFramePath(sequence: FrameSequence) {
+  return sequence.getPath(sequence.count - 1)
+}
+
 export async function preloadFrames(
   sequence: FrameSequence,
   onProgress?: (loaded: number, total: number) => void,
@@ -88,6 +92,31 @@ export function drawFrameCover(
   paintFrameCover(ctx, img, width, height)
 }
 
+export function drawFrameAtProgress(
+  ctx: CanvasRenderingContext2D,
+  frames: HTMLImageElement[],
+  progress: number,
+  width: number,
+  height: number,
+  lastIndexRef?: { current: number },
+) {
+  if (!frames.length || width <= 0 || height <= 0) return
+
+  const max = frames.length - 1
+  const index = Math.round(Math.min(Math.max(progress, 0), 1) * max)
+
+  if (lastIndexRef && lastIndexRef.current === index) return
+
+  const frame = frames[index]
+  if (!frame?.complete || !frame.naturalWidth) return
+
+  if (lastIndexRef) lastIndexRef.current = index
+
+  ctx.clearRect(0, 0, width, height)
+  paintFrameCover(ctx, frame, width, height)
+}
+
+/** @deprecated — blend рисует 2 кадра FullHD каждый тик, тормозит. */
 export function drawFrameBlend(
   ctx: CanvasRenderingContext2D,
   frames: HTMLImageElement[],
@@ -95,32 +124,5 @@ export function drawFrameBlend(
   width: number,
   height: number,
 ) {
-  if (!frames.length || width <= 0 || height <= 0) return
-
-  const max = frames.length - 1
-  const position = Math.min(Math.max(progress, 0), 1) * max
-  const indexA = Math.floor(position)
-  const indexB = Math.min(indexA + 1, max)
-  const blend = position - indexA
-
-  const frameA = frames[indexA]
-  if (!frameA?.complete || !frameA.naturalWidth) return
-
-  ctx.clearRect(0, 0, width, height)
-
-  if (blend < 0.001 || indexA === indexB) {
-    paintFrameCover(ctx, frameA, width, height)
-    return
-  }
-
-  const frameB = frames[indexB]
-  if (!frameB?.complete || !frameB.naturalWidth) {
-    paintFrameCover(ctx, frameA, width, height)
-    return
-  }
-
-  paintFrameCover(ctx, frameA, width, height)
-  ctx.globalAlpha = blend
-  paintFrameCover(ctx, frameB, width, height)
-  ctx.globalAlpha = 1
+  drawFrameAtProgress(ctx, frames, progress, width, height)
 }

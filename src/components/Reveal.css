@@ -1,0 +1,16 @@
+.reveal-words {
+  display: block;
+}
+
+.reveal-words__mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  margin-right: 0.26em;
+  padding-bottom: 0.12em;
+}
+
+.reveal-words__word {
+  display: inline-block;
+  will-change: transform;
+}

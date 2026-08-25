@@ -39,12 +39,12 @@ export function FiligreeOrnament({ className, animate = true }: FiligreeOrnament
         strokeOpacity: 1,
       })
 
-      // scrub — надёжнее once после pin Hero: к моменту About уже дорисовано
+  // scrub — надёжнее once: дорисовка по мере появления
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
-          start: 'top 92%',
-          end: 'top 45%',
+          start: 'top 95%',
+          end: 'top 55%',
           scrub: 0.85,
           invalidateOnRefresh: true,
         },

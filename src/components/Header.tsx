@@ -4,7 +4,7 @@ import './Header.css'
 export function Header() {
   return (
     <header className="header">
-      <a className="header__brand" href="#hero">
+      <a className="header__brand" href="#welcome">
         {brand.name}
       </a>
       <nav className="header__nav">

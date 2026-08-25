@@ -1,8 +1,102 @@
+---
+name: premium-web-design
+description: Create premium cinematic websites with strong art direction, editorial composition and scroll-driven storytelling.
+---
+
+# Premium Web Design Skill
+
+You are acting as a senior digital art director
+and award-winning interactive web designer.
+
+Your job is not simply to make interfaces functional.
+
+Your job is to create a visually directed experience.
+
+## Before writing code
+
+Always:
+
+1. Inspect the existing design.
+2. Inspect existing components.
+3. Identify the visual hierarchy.
+4. Identify the primary visual hero.
+5. Determine the intended emotional response.
+6. Analyze spacing and composition.
+7. Determine how motion contributes to storytelling.
+
+Do not immediately start coding.
+
+## Design decisions
+
+Prefer intentional design over generic conventions.
+
+Every major element should answer:
+
+- Why is it here?
+- What should the user notice first?
+- What is the visual focal point?
+- What happens when the user scrolls?
+- How does this transition to the next section?
+
+## Composition
+
+Use:
+
+- asymmetry
+- scale contrast
+- whitespace
+- layering
+- depth
+- visual tension
+- controlled overlap
+
+Avoid:
+
+- generic cards
+- repetitive sections
+- excessive containers
+- predictable layouts
+
+## Motion
+
+Treat scroll as a storytelling mechanism.
+
+Do not animate everything.
+
+Create relationships between:
+
+scroll position
+→ camera movement
+→ product movement
+→ typography
+→ background
+→ next scene
+
+Motion should feel intentional and physical.
+
+## Implementation
+
+Prefer GPU-friendly animation:
+
+transform
+opacity
+scale
+rotate
+clip-path when appropriate
+
+Avoid unnecessary layout-triggering properties.
+
+Never introduce expensive scroll handlers
+without measuring their performance.
+
+Use requestAnimationFrame when appropriate.
+
+After implementing complex animation,
+inspect performance using Chrome DevTools.
+
 # GSAP Documentation
 
-
 ## docs
-
 
 ### v3
 
@@ -16,157 +110,157 @@
 - [EndArray](/docs/v3/GSAP/CorePlugins/EndArray.md)
 - [Modifiers](/docs/v3/GSAP/CorePlugins/Modifiers.md)
 - [Snap](/docs/v3/GSAP/CorePlugins/Snap.md)
-- [gsap.config()](/docs/v3/GSAP/gsap.config().md)
-- [gsap.context()](/docs/v3/GSAP/gsap.context().md)
-- [gsap.defaults()](/docs/v3/GSAP/gsap.defaults().md)
-- [gsap.delayedCall()](/docs/v3/GSAP/gsap.delayedCall().md)
+- [gsap.config()](</docs/v3/GSAP/gsap.config().md>)
+- [gsap.context()](</docs/v3/GSAP/gsap.context().md>)
+- [gsap.defaults()](</docs/v3/GSAP/gsap.defaults().md>)
+- [gsap.delayedCall()](</docs/v3/GSAP/gsap.delayedCall().md>)
 - [gsap.effects](/docs/v3/GSAP/gsap.effects.md)
-- [gsap.exportRoot()](/docs/v3/GSAP/gsap.exportRoot().md)
-- [gsap.from()](/docs/v3/GSAP/gsap.from().md)
-- [gsap.fromTo()](/docs/v3/GSAP/gsap.fromTo().md)
-- [gsap.getById()](/docs/v3/GSAP/gsap.getById().md)
-- [gsap.getProperty()](/docs/v3/GSAP/gsap.getProperty().md)
-- [gsap.getTweensOf()](/docs/v3/GSAP/gsap.getTweensOf().md)
+- [gsap.exportRoot()](</docs/v3/GSAP/gsap.exportRoot().md>)
+- [gsap.from()](</docs/v3/GSAP/gsap.from().md>)
+- [gsap.fromTo()](</docs/v3/GSAP/gsap.fromTo().md>)
+- [gsap.getById()](</docs/v3/GSAP/gsap.getById().md>)
+- [gsap.getProperty()](</docs/v3/GSAP/gsap.getProperty().md>)
+- [gsap.getTweensOf()](</docs/v3/GSAP/gsap.getTweensOf().md>)
 - [gsap.globalTimeline](/docs/v3/GSAP/gsap.globalTimeline.md)
-- [gsap.isTweening()](/docs/v3/GSAP/gsap.isTweening().md)
-- [gsap.killTweensOf()](/docs/v3/GSAP/gsap.killTweensOf().md)
-- [gsap.matchMedia()](/docs/v3/GSAP/gsap.matchMedia().md)
-- [gsap.matchMediaRefresh()](/docs/v3/GSAP/gsap.matchMediaRefresh().md)
-- [gsap.parseEase()](/docs/v3/GSAP/gsap.parseEase().md)
-- [gsap.quickSetter()](/docs/v3/GSAP/gsap.quickSetter().md)
-- [gsap.quickTo()](/docs/v3/GSAP/gsap.quickTo().md)
-- [gsap.registerEase()](/docs/v3/GSAP/gsap.registerEase().md)
-- [gsap.registerEffect()](/docs/v3/GSAP/gsap.registerEffect().md)
-- [gsap.registerPlugin()](/docs/v3/GSAP/gsap.registerPlugin().md)
-- [gsap.set()](/docs/v3/GSAP/gsap.set().md)
+- [gsap.isTweening()](</docs/v3/GSAP/gsap.isTweening().md>)
+- [gsap.killTweensOf()](</docs/v3/GSAP/gsap.killTweensOf().md>)
+- [gsap.matchMedia()](</docs/v3/GSAP/gsap.matchMedia().md>)
+- [gsap.matchMediaRefresh()](</docs/v3/GSAP/gsap.matchMediaRefresh().md>)
+- [gsap.parseEase()](</docs/v3/GSAP/gsap.parseEase().md>)
+- [gsap.quickSetter()](</docs/v3/GSAP/gsap.quickSetter().md>)
+- [gsap.quickTo()](</docs/v3/GSAP/gsap.quickTo().md>)
+- [gsap.registerEase()](</docs/v3/GSAP/gsap.registerEase().md>)
+- [gsap.registerEffect()](</docs/v3/GSAP/gsap.registerEffect().md>)
+- [gsap.registerPlugin()](</docs/v3/GSAP/gsap.registerPlugin().md>)
+- [gsap.set()](</docs/v3/GSAP/gsap.set().md>)
 - [gsap.ticker](/docs/v3/GSAP/gsap.ticker.md)
-- [gsap.timeline()](/docs/v3/GSAP/gsap.timeline().md)
-- [gsap.to()](/docs/v3/GSAP/gsap.to().md)
-- [gsap.updateRoot()](/docs/v3/GSAP/gsap.updateRoot().md)
+- [gsap.timeline()](</docs/v3/GSAP/gsap.timeline().md>)
+- [gsap.to()](</docs/v3/GSAP/gsap.to().md>)
+- [gsap.updateRoot()](</docs/v3/GSAP/gsap.updateRoot().md>)
 - [gsap.utils](/docs/v3/GSAP/gsap.utils.md)
 - [gsap.version](/docs/v3/GSAP/gsap.version.md)
 
 ##### Timeline
 
 - [Timeline](/docs/v3/GSAP/Timeline.md)
-- [add](/docs/v3/GSAP/Timeline/add().md)
-- [addLabel](/docs/v3/GSAP/Timeline/addLabel().md)
-- [addPause](/docs/v3/GSAP/Timeline/addPause().md)
+- [add](</docs/v3/GSAP/Timeline/add().md>)
+- [addLabel](</docs/v3/GSAP/Timeline/addLabel().md>)
+- [addPause](</docs/v3/GSAP/Timeline/addPause().md>)
 - [autoRemoveChildren](/docs/v3/GSAP/Timeline/autoRemoveChildren.md)
-- [call](/docs/v3/GSAP/Timeline/call().md)
-- [clear](/docs/v3/GSAP/Timeline/clear().md)
-- [currentLabel](/docs/v3/GSAP/Timeline/currentLabel().md)
+- [call](</docs/v3/GSAP/Timeline/call().md>)
+- [clear](</docs/v3/GSAP/Timeline/clear().md>)
+- [currentLabel](</docs/v3/GSAP/Timeline/currentLabel().md>)
 - [data](/docs/v3/GSAP/Timeline/data.md)
-- [delay](/docs/v3/GSAP/Timeline/delay().md)
-- [duration](/docs/v3/GSAP/Timeline/duration().md)
-- [endTime](/docs/v3/GSAP/Timeline/endTime().md)
-- [eventCallback](/docs/v3/GSAP/Timeline/eventCallback().md)
-- [from](/docs/v3/GSAP/Timeline/from().md)
-- [fromTo](/docs/v3/GSAP/Timeline/fromTo().md)
-- [getById](/docs/v3/GSAP/Timeline/getById().md)
-- [getChildren](/docs/v3/GSAP/Timeline/getChildren().md)
-- [getTweensOf](/docs/v3/GSAP/Timeline/getTweensOf().md)
-- [globalTime](/docs/v3/GSAP/Timeline/globalTime().md)
-- [invalidate](/docs/v3/GSAP/Timeline/invalidate().md)
-- [isActive](/docs/v3/GSAP/Timeline/isActive().md)
-- [iteration](/docs/v3/GSAP/Timeline/iteration().md)
-- [kill](/docs/v3/GSAP/Timeline/kill().md)
-- [killTweensOf](/docs/v3/GSAP/Timeline/killTweensOf().md)
+- [delay](</docs/v3/GSAP/Timeline/delay().md>)
+- [duration](</docs/v3/GSAP/Timeline/duration().md>)
+- [endTime](</docs/v3/GSAP/Timeline/endTime().md>)
+- [eventCallback](</docs/v3/GSAP/Timeline/eventCallback().md>)
+- [from](</docs/v3/GSAP/Timeline/from().md>)
+- [fromTo](</docs/v3/GSAP/Timeline/fromTo().md>)
+- [getById](</docs/v3/GSAP/Timeline/getById().md>)
+- [getChildren](</docs/v3/GSAP/Timeline/getChildren().md>)
+- [getTweensOf](</docs/v3/GSAP/Timeline/getTweensOf().md>)
+- [globalTime](</docs/v3/GSAP/Timeline/globalTime().md>)
+- [invalidate](</docs/v3/GSAP/Timeline/invalidate().md>)
+- [isActive](</docs/v3/GSAP/Timeline/isActive().md>)
+- [iteration](</docs/v3/GSAP/Timeline/iteration().md>)
+- [kill](</docs/v3/GSAP/Timeline/kill().md>)
+- [killTweensOf](</docs/v3/GSAP/Timeline/killTweensOf().md>)
 - [labels](/docs/v3/GSAP/Timeline/labels.md)
-- [nextLabel](/docs/v3/GSAP/Timeline/nextLabel().md)
+- [nextLabel](</docs/v3/GSAP/Timeline/nextLabel().md>)
 - [parent](/docs/v3/GSAP/Timeline/parent.md)
-- [pause](/docs/v3/GSAP/Timeline/pause().md)
-- [paused](/docs/v3/GSAP/Timeline/paused().md)
-- [play](/docs/v3/GSAP/Timeline/play().md)
-- [previousLabel](/docs/v3/GSAP/Timeline/previousLabel().md)
-- [progress](/docs/v3/GSAP/Timeline/progress().md)
-- [recent](/docs/v3/GSAP/Timeline/recent().md)
-- [remove](/docs/v3/GSAP/Timeline/remove().md)
-- [removeLabel](/docs/v3/GSAP/Timeline/removeLabel().md)
-- [removePause](/docs/v3/GSAP/Timeline/removePause().md)
-- [repeat](/docs/v3/GSAP/Timeline/repeat().md)
-- [repeatDelay](/docs/v3/GSAP/Timeline/repeatDelay().md)
-- [restart](/docs/v3/GSAP/Timeline/restart().md)
-- [resume](/docs/v3/GSAP/Timeline/resume().md)
-- [reverse](/docs/v3/GSAP/Timeline/reverse().md)
-- [reversed](/docs/v3/GSAP/Timeline/reversed().md)
-- [revert](/docs/v3/GSAP/Timeline/revert().md)
+- [pause](</docs/v3/GSAP/Timeline/pause().md>)
+- [paused](</docs/v3/GSAP/Timeline/paused().md>)
+- [play](</docs/v3/GSAP/Timeline/play().md>)
+- [previousLabel](</docs/v3/GSAP/Timeline/previousLabel().md>)
+- [progress](</docs/v3/GSAP/Timeline/progress().md>)
+- [recent](</docs/v3/GSAP/Timeline/recent().md>)
+- [remove](</docs/v3/GSAP/Timeline/remove().md>)
+- [removeLabel](</docs/v3/GSAP/Timeline/removeLabel().md>)
+- [removePause](</docs/v3/GSAP/Timeline/removePause().md>)
+- [repeat](</docs/v3/GSAP/Timeline/repeat().md>)
+- [repeatDelay](</docs/v3/GSAP/Timeline/repeatDelay().md>)
+- [restart](</docs/v3/GSAP/Timeline/restart().md>)
+- [resume](</docs/v3/GSAP/Timeline/resume().md>)
+- [reverse](</docs/v3/GSAP/Timeline/reverse().md>)
+- [reversed](</docs/v3/GSAP/Timeline/reversed().md>)
+- [revert](</docs/v3/GSAP/Timeline/revert().md>)
 - [scrollTrigger](/docs/v3/GSAP/Timeline/scrollTrigger.md)
-- [seek](/docs/v3/GSAP/Timeline/seek().md)
-- [set](/docs/v3/GSAP/Timeline/set().md)
-- [shiftChildren](/docs/v3/GSAP/Timeline/shiftChildren().md)
+- [seek](</docs/v3/GSAP/Timeline/seek().md>)
+- [set](</docs/v3/GSAP/Timeline/set().md>)
+- [shiftChildren](</docs/v3/GSAP/Timeline/shiftChildren().md>)
 - [smoothChildTiming](/docs/v3/GSAP/Timeline/smoothChildTiming.md)
-- [startTime](/docs/v3/GSAP/Timeline/startTime().md)
-- [then](/docs/v3/GSAP/Timeline/then().md)
-- [time](/docs/v3/GSAP/Timeline/time().md)
-- [timeScale](/docs/v3/GSAP/Timeline/timeScale().md)
-- [to](/docs/v3/GSAP/Timeline/to().md)
-- [totalDuration](/docs/v3/GSAP/Timeline/totalDuration().md)
-- [totalProgress](/docs/v3/GSAP/Timeline/totalProgress().md)
-- [totalTime](/docs/v3/GSAP/Timeline/totalTime().md)
-- [tweenFromTo](/docs/v3/GSAP/Timeline/tweenFromTo().md)
-- [tweenTo](/docs/v3/GSAP/Timeline/tweenTo().md)
+- [startTime](</docs/v3/GSAP/Timeline/startTime().md>)
+- [then](</docs/v3/GSAP/Timeline/then().md>)
+- [time](</docs/v3/GSAP/Timeline/time().md>)
+- [timeScale](</docs/v3/GSAP/Timeline/timeScale().md>)
+- [to](</docs/v3/GSAP/Timeline/to().md>)
+- [totalDuration](</docs/v3/GSAP/Timeline/totalDuration().md>)
+- [totalProgress](</docs/v3/GSAP/Timeline/totalProgress().md>)
+- [totalTime](</docs/v3/GSAP/Timeline/totalTime().md>)
+- [tweenFromTo](</docs/v3/GSAP/Timeline/tweenFromTo().md>)
+- [tweenTo](</docs/v3/GSAP/Timeline/tweenTo().md>)
 - [vars](/docs/v3/GSAP/Timeline/vars.md)
-- [yoyo](/docs/v3/GSAP/Timeline/yoyo().md)
+- [yoyo](</docs/v3/GSAP/Timeline/yoyo().md>)
 
 ##### Tween
 
 - [Tween](/docs/v3/GSAP/Tween.md)
 - [data](/docs/v3/GSAP/Tween/data.md)
-- [delay](/docs/v3/GSAP/Tween/delay().md)
-- [duration](/docs/v3/GSAP/Tween/duration().md)
-- [endTime](/docs/v3/GSAP/Tween/endTime().md)
-- [eventCallback](/docs/v3/GSAP/Tween/eventCallback().md)
-- [globalTime](/docs/v3/GSAP/Tween/globalTime().md)
-- [invalidate](/docs/v3/GSAP/Tween/invalidate().md)
-- [isActive](/docs/v3/GSAP/Tween/isActive().md)
-- [iteration](/docs/v3/GSAP/Tween/iteration().md)
-- [kill](/docs/v3/GSAP/Tween/kill().md)
-- [pause](/docs/v3/GSAP/Tween/pause().md)
-- [paused](/docs/v3/GSAP/Tween/paused().md)
-- [play](/docs/v3/GSAP/Tween/play().md)
-- [progress](/docs/v3/GSAP/Tween/progress().md)
+- [delay](</docs/v3/GSAP/Tween/delay().md>)
+- [duration](</docs/v3/GSAP/Tween/duration().md>)
+- [endTime](</docs/v3/GSAP/Tween/endTime().md>)
+- [eventCallback](</docs/v3/GSAP/Tween/eventCallback().md>)
+- [globalTime](</docs/v3/GSAP/Tween/globalTime().md>)
+- [invalidate](</docs/v3/GSAP/Tween/invalidate().md>)
+- [isActive](</docs/v3/GSAP/Tween/isActive().md>)
+- [iteration](</docs/v3/GSAP/Tween/iteration().md>)
+- [kill](</docs/v3/GSAP/Tween/kill().md>)
+- [pause](</docs/v3/GSAP/Tween/pause().md>)
+- [paused](</docs/v3/GSAP/Tween/paused().md>)
+- [play](</docs/v3/GSAP/Tween/play().md>)
+- [progress](</docs/v3/GSAP/Tween/progress().md>)
 - [ratio](/docs/v3/GSAP/Tween/ratio.md)
-- [repeat](/docs/v3/GSAP/Tween/repeat().md)
-- [repeatDelay](/docs/v3/GSAP/Tween/repeatDelay().md)
-- [restart](/docs/v3/GSAP/Tween/restart().md)
-- [resume](/docs/v3/GSAP/Tween/resume().md)
-- [reverse](/docs/v3/GSAP/Tween/reverse().md)
-- [reversed](/docs/v3/GSAP/Tween/reversed().md)
-- [revert](/docs/v3/GSAP/Tween/revert().md)
+- [repeat](</docs/v3/GSAP/Tween/repeat().md>)
+- [repeatDelay](</docs/v3/GSAP/Tween/repeatDelay().md>)
+- [restart](</docs/v3/GSAP/Tween/restart().md>)
+- [resume](</docs/v3/GSAP/Tween/resume().md>)
+- [reverse](</docs/v3/GSAP/Tween/reverse().md>)
+- [reversed](</docs/v3/GSAP/Tween/reversed().md>)
+- [revert](</docs/v3/GSAP/Tween/revert().md>)
 - [scrollTrigger](/docs/v3/GSAP/Tween/scrollTrigger.md)
-- [seek](/docs/v3/GSAP/Tween/seek().md)
-- [startTime](/docs/v3/GSAP/Tween/startTime().md)
-- [targets](/docs/v3/GSAP/Tween/targets().md)
-- [then](/docs/v3/GSAP/Tween/then().md)
-- [time](/docs/v3/GSAP/Tween/time().md)
-- [timeScale](/docs/v3/GSAP/Tween/timeScale().md)
-- [totalDuration](/docs/v3/GSAP/Tween/totalDuration().md)
-- [totalProgress](/docs/v3/GSAP/Tween/totalProgress().md)
-- [totalTime](/docs/v3/GSAP/Tween/totalTime().md)
+- [seek](</docs/v3/GSAP/Tween/seek().md>)
+- [startTime](</docs/v3/GSAP/Tween/startTime().md>)
+- [targets](</docs/v3/GSAP/Tween/targets().md>)
+- [then](</docs/v3/GSAP/Tween/then().md>)
+- [time](</docs/v3/GSAP/Tween/time().md>)
+- [timeScale](</docs/v3/GSAP/Tween/timeScale().md>)
+- [totalDuration](</docs/v3/GSAP/Tween/totalDuration().md>)
+- [totalProgress](</docs/v3/GSAP/Tween/totalProgress().md>)
+- [totalTime](</docs/v3/GSAP/Tween/totalTime().md>)
 - [vars](/docs/v3/GSAP/Tween/vars.md)
-- [yoyo](/docs/v3/GSAP/Tween/yoyo().md)
+- [yoyo](</docs/v3/GSAP/Tween/yoyo().md>)
 
 ##### Utils
 
 - [Utility Methods](/docs/v3/GSAP/UtilityMethods.md)
-- [checkPrefix](/docs/v3/GSAP/UtilityMethods/checkPrefix().md)
-- [clamp](/docs/v3/GSAP/UtilityMethods/clamp().md)
-- [distribute](/docs/v3/GSAP/UtilityMethods/distribute().md)
-- [getUnit](/docs/v3/GSAP/UtilityMethods/getUnit().md)
-- [interpolate](/docs/v3/GSAP/UtilityMethods/interpolate().md)
-- [mapRange](/docs/v3/GSAP/UtilityMethods/mapRange().md)
-- [normalize](/docs/v3/GSAP/UtilityMethods/normalize().md)
-- [pipe](/docs/v3/GSAP/UtilityMethods/pipe().md)
-- [random](/docs/v3/GSAP/UtilityMethods/random().md)
-- [selector](/docs/v3/GSAP/UtilityMethods/selector().md)
-- [shuffle](/docs/v3/GSAP/UtilityMethods/shuffle().md)
-- [snap](/docs/v3/GSAP/UtilityMethods/snap().md)
-- [splitColor](/docs/v3/GSAP/UtilityMethods/splitColor().md)
-- [toArray](/docs/v3/GSAP/UtilityMethods/toArray().md)
-- [unitize](/docs/v3/GSAP/UtilityMethods/unitize().md)
-- [wrap](/docs/v3/GSAP/UtilityMethods/wrap().md)
-- [wrapYoyo](/docs/v3/GSAP/UtilityMethods/wrapYoyo().md)
+- [checkPrefix](</docs/v3/GSAP/UtilityMethods/checkPrefix().md>)
+- [clamp](</docs/v3/GSAP/UtilityMethods/clamp().md>)
+- [distribute](</docs/v3/GSAP/UtilityMethods/distribute().md>)
+- [getUnit](</docs/v3/GSAP/UtilityMethods/getUnit().md>)
+- [interpolate](</docs/v3/GSAP/UtilityMethods/interpolate().md>)
+- [mapRange](</docs/v3/GSAP/UtilityMethods/mapRange().md>)
+- [normalize](</docs/v3/GSAP/UtilityMethods/normalize().md>)
+- [pipe](</docs/v3/GSAP/UtilityMethods/pipe().md>)
+- [random](</docs/v3/GSAP/UtilityMethods/random().md>)
+- [selector](</docs/v3/GSAP/UtilityMethods/selector().md>)
+- [shuffle](</docs/v3/GSAP/UtilityMethods/shuffle().md>)
+- [snap](</docs/v3/GSAP/UtilityMethods/snap().md>)
+- [splitColor](</docs/v3/GSAP/UtilityMethods/splitColor().md>)
+- [toArray](</docs/v3/GSAP/UtilityMethods/toArray().md>)
+- [unitize](</docs/v3/GSAP/UtilityMethods/unitize().md>)
+- [wrap](</docs/v3/GSAP/UtilityMethods/wrap().md>)
+- [wrapYoyo](</docs/v3/GSAP/UtilityMethods/wrapYoyo().md>)
 
 #### Eases
 
@@ -221,27 +315,27 @@
 ##### CSSRulePlugin
 
 - [CSSRule](/docs/v3/Plugins/CSSRulePlugin.md)
-- [CSSRulePlugin.getRule](/docs/v3/Plugins/CSSRulePlugin/methods/static-getRule().md)
+- [CSSRulePlugin.getRule](</docs/v3/Plugins/CSSRulePlugin/methods/static-getRule().md>)
 
 ##### Draggable
 
 - [Draggable](/docs/v3/Plugins/Draggable.md)
-- [addEventListener](/docs/v3/Plugins/Draggable/addEventListener().md)
-- [applyBounds](/docs/v3/Plugins/Draggable/applyBounds().md)
+- [addEventListener](</docs/v3/Plugins/Draggable/addEventListener().md>)
+- [applyBounds](</docs/v3/Plugins/Draggable/applyBounds().md>)
 - [autoScroll](/docs/v3/Plugins/Draggable/autoScroll.md)
 - [deltaX](/docs/v3/Plugins/Draggable/deltaX.md)
 - [deltaY](/docs/v3/Plugins/Draggable/deltaY.md)
-- [disable](/docs/v3/Plugins/Draggable/disable().md)
-- [enable](/docs/v3/Plugins/Draggable/enable().md)
-- [enabled](/docs/v3/Plugins/Draggable/enabled().md)
-- [endDrag](/docs/v3/Plugins/Draggable/endDrag().md)
+- [disable](</docs/v3/Plugins/Draggable/disable().md>)
+- [enable](</docs/v3/Plugins/Draggable/enable().md>)
+- [enabled](</docs/v3/Plugins/Draggable/enabled().md>)
+- [endDrag](</docs/v3/Plugins/Draggable/endDrag().md>)
 - [endRotation](/docs/v3/Plugins/Draggable/endRotation.md)
 - [endX](/docs/v3/Plugins/Draggable/endX.md)
 - [endY](/docs/v3/Plugins/Draggable/endY.md)
-- [getDirection](/docs/v3/Plugins/Draggable/getDirection().md)
+- [getDirection](</docs/v3/Plugins/Draggable/getDirection().md>)
 - [isPressed](/docs/v3/Plugins/Draggable/isPressed.md)
 - [isThrowing](/docs/v3/Plugins/Draggable/isThrowing.md)
-- [kill](/docs/v3/Plugins/Draggable/kill().md)
+- [kill](</docs/v3/Plugins/Draggable/kill().md>)
 - [lockAxis](/docs/v3/Plugins/Draggable/lockAxis.md)
 - [lockedAxis](/docs/v3/Plugins/Draggable/lockedAxis.md)
 - [maxRotation](/docs/v3/Plugins/Draggable/maxRotation.md)
@@ -254,16 +348,16 @@
 - [pointerX](/docs/v3/Plugins/Draggable/pointerX.md)
 - [pointerY](/docs/v3/Plugins/Draggable/pointerY.md)
 - [rotation](/docs/v3/Plugins/Draggable/rotation.md)
-- [startDrag](/docs/v3/Plugins/Draggable/startDrag().md)
+- [startDrag](</docs/v3/Plugins/Draggable/startDrag().md>)
 - [startX](/docs/v3/Plugins/Draggable/startX.md)
 - [startY](/docs/v3/Plugins/Draggable/startY.md)
-- [Draggable.create](/docs/v3/Plugins/Draggable/static.create().md)
-- [Draggable.get](/docs/v3/Plugins/Draggable/static.get().md)
-- [Draggable.hitTest](/docs/v3/Plugins/Draggable/static.hitTest().md)
-- [Draggable.timeSinceDrag](/docs/v3/Plugins/Draggable/static.timeSinceDrag().md)
+- [Draggable.create](</docs/v3/Plugins/Draggable/static.create().md>)
+- [Draggable.get](</docs/v3/Plugins/Draggable/static.get().md>)
+- [Draggable.hitTest](</docs/v3/Plugins/Draggable/static.hitTest().md>)
+- [Draggable.timeSinceDrag](</docs/v3/Plugins/Draggable/static.timeSinceDrag().md>)
 - [target](/docs/v3/Plugins/Draggable/target.md)
 - [tween](/docs/v3/Plugins/Draggable/tween.md)
-- [update](/docs/v3/Plugins/Draggable/update().md)
+- [update](</docs/v3/Plugins/Draggable/update().md>)
 - [vars](/docs/v3/Plugins/Draggable/vars.md)
 - [x](/docs/v3/Plugins/Draggable/x.md)
 - [y](/docs/v3/Plugins/Draggable/y.md)
@@ -272,8 +366,8 @@
 ##### DrawSVG
 
 - [DrawSVG](/docs/v3/Plugins/DrawSVGPlugin.md)
-- [DrawSVGPlugin.getLength](/docs/v3/Plugins/DrawSVGPlugin/static.getLength().md)
-- [DrawSVGPlugin.getPosition](/docs/v3/Plugins/DrawSVGPlugin/static.getPosition().md)
+- [DrawSVGPlugin.getLength](</docs/v3/Plugins/DrawSVGPlugin/static.getLength().md>)
+- [DrawSVGPlugin.getPosition](</docs/v3/Plugins/DrawSVGPlugin/static.getPosition().md>)
 
 ##### EaselPlugin
 
@@ -282,37 +376,37 @@
 ##### Flip
 
 - [Flip](/docs/v3/Plugins/Flip.md)
-- [Flip.batch](/docs/v3/Plugins/Flip/static.batch().md)
-- [Flip.fit](/docs/v3/Plugins/Flip/static.fit().md)
-- [Flip.from](/docs/v3/Plugins/Flip/static.from().md)
-- [Flip.getState](/docs/v3/Plugins/Flip/static.getState().md)
-- [Flip.isFlipping](/docs/v3/Plugins/Flip/static.isFlipping().md)
-- [Flip.killFlipsOf](/docs/v3/Plugins/Flip/static.killFlipsOf().md)
-- [Flip.makeAbsolute](/docs/v3/Plugins/Flip/static.makeAbsolute().md)
-- [Flip.to](/docs/v3/Plugins/Flip/static.to().md)
+- [Flip.batch](</docs/v3/Plugins/Flip/static.batch().md>)
+- [Flip.fit](</docs/v3/Plugins/Flip/static.fit().md>)
+- [Flip.from](</docs/v3/Plugins/Flip/static.from().md>)
+- [Flip.getState](</docs/v3/Plugins/Flip/static.getState().md>)
+- [Flip.isFlipping](</docs/v3/Plugins/Flip/static.isFlipping().md>)
+- [Flip.killFlipsOf](</docs/v3/Plugins/Flip/static.killFlipsOf().md>)
+- [Flip.makeAbsolute](</docs/v3/Plugins/Flip/static.makeAbsolute().md>)
+- [Flip.to](</docs/v3/Plugins/Flip/static.to().md>)
 
 ##### GSDevTools
 
 - [GSDevTools](/docs/v3/Plugins/GSDevTools.md)
-- [GSDevTools.create](/docs/v3/Plugins/GSDevTools/static.create().md)
+- [GSDevTools.create](</docs/v3/Plugins/GSDevTools/static.create().md>)
 
 ##### Inertia
 
 - [Inertia](/docs/v3/Plugins/InertiaPlugin.md)
-- [InertiaPlugin.getVelocity](/docs/v3/Plugins/InertiaPlugin/static.getVelocity().md)
-- [InertiaPlugin.isTracking](/docs/v3/Plugins/InertiaPlugin/static.isTracking().md)
-- [InertiaPlugin.track](/docs/v3/Plugins/InertiaPlugin/static.track().md)
-- [InertiaPlugin.untrack](/docs/v3/Plugins/InertiaPlugin/static.untrack().md)
+- [InertiaPlugin.getVelocity](</docs/v3/Plugins/InertiaPlugin/static.getVelocity().md>)
+- [InertiaPlugin.isTracking](</docs/v3/Plugins/InertiaPlugin/static.isTracking().md>)
+- [InertiaPlugin.track](</docs/v3/Plugins/InertiaPlugin/static.track().md>)
+- [InertiaPlugin.untrack](</docs/v3/Plugins/InertiaPlugin/static.untrack().md>)
 - [VelocityTracker](/docs/v3/Plugins/InertiaPlugin/VelocityTracker.md)
-- [addProp](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.addProp().md)
-- [get](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.get().md)
-- [getByTarget](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.getByTarget().md)
-- [isTracking](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.isTracking().md)
-- [isTrackingProp](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.isTrackingProp().md)
-- [removeProp](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.removeProp().md)
+- [addProp](</docs/v3/Plugins/InertiaPlugin/VelocityTracker/.addProp().md>)
+- [get](</docs/v3/Plugins/InertiaPlugin/VelocityTracker/.get().md>)
+- [getByTarget](</docs/v3/Plugins/InertiaPlugin/VelocityTracker/.getByTarget().md>)
+- [isTracking](</docs/v3/Plugins/InertiaPlugin/VelocityTracker/.isTracking().md>)
+- [isTrackingProp](</docs/v3/Plugins/InertiaPlugin/VelocityTracker/.isTrackingProp().md>)
+- [removeProp](</docs/v3/Plugins/InertiaPlugin/VelocityTracker/.removeProp().md>)
 - [target](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.target.md)
 - [track](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.track.md)
-- [untrack](/docs/v3/Plugins/InertiaPlugin/VelocityTracker/.untrack().md)
+- [untrack](</docs/v3/Plugins/InertiaPlugin/VelocityTracker/.untrack().md>)
 
 ##### MorphSVG
 
@@ -328,36 +422,36 @@
 
 - [MotionPath](/docs/v3/Plugins/MotionPathPlugin.md)
 - [MotionPathPlugin.pointsToSegment](/docs/v3/Plugins/MotionPathPlugin/methods/static-pointsToSegment.md)
-- [MotionPathPlugin.arrayToRawPath](/docs/v3/Plugins/MotionPathPlugin/static.arrayToRawPath().md)
-- [MotionPathPlugin.convertCoordinates](/docs/v3/Plugins/MotionPathPlugin/static.convertCoordinates().md)
-- [MotionPathPlugin.convertToPath](/docs/v3/Plugins/MotionPathPlugin/static.convertToPath().md)
-- [MotionPathPlugin.getAlignMatrix](/docs/v3/Plugins/MotionPathPlugin/static.getAlignMatrix().md)
-- [MotionPathPlugin.getGlobalMatrix](/docs/v3/Plugins/MotionPathPlugin/static.getGlobalMatrix().md)
-- [MotionPathPlugin.getLength](/docs/v3/Plugins/MotionPathPlugin/static.getLength().md)
-- [MotionPathPlugin.getPositionOnPath](/docs/v3/Plugins/MotionPathPlugin/static.getPositionOnPath().md)
-- [MotionPathPlugin.getRawPath](/docs/v3/Plugins/MotionPathPlugin/static.getRawPath().md)
-- [MotionPathPlugin.getRelativePosition](/docs/v3/Plugins/MotionPathPlugin/static.getRelativePosition().md)
-- [MotionPathPlugin.rawPathToString](/docs/v3/Plugins/MotionPathPlugin/static.rawPathToString().md)
-- [MotionPathPlugin.sliceRawPath](/docs/v3/Plugins/MotionPathPlugin/static.sliceRawPath().md)
-- [MotionPathPlugin.stringToRawPath](/docs/v3/Plugins/MotionPathPlugin/static.stringToRawPath().md)
+- [MotionPathPlugin.arrayToRawPath](</docs/v3/Plugins/MotionPathPlugin/static.arrayToRawPath().md>)
+- [MotionPathPlugin.convertCoordinates](</docs/v3/Plugins/MotionPathPlugin/static.convertCoordinates().md>)
+- [MotionPathPlugin.convertToPath](</docs/v3/Plugins/MotionPathPlugin/static.convertToPath().md>)
+- [MotionPathPlugin.getAlignMatrix](</docs/v3/Plugins/MotionPathPlugin/static.getAlignMatrix().md>)
+- [MotionPathPlugin.getGlobalMatrix](</docs/v3/Plugins/MotionPathPlugin/static.getGlobalMatrix().md>)
+- [MotionPathPlugin.getLength](</docs/v3/Plugins/MotionPathPlugin/static.getLength().md>)
+- [MotionPathPlugin.getPositionOnPath](</docs/v3/Plugins/MotionPathPlugin/static.getPositionOnPath().md>)
+- [MotionPathPlugin.getRawPath](</docs/v3/Plugins/MotionPathPlugin/static.getRawPath().md>)
+- [MotionPathPlugin.getRelativePosition](</docs/v3/Plugins/MotionPathPlugin/static.getRelativePosition().md>)
+- [MotionPathPlugin.rawPathToString](</docs/v3/Plugins/MotionPathPlugin/static.rawPathToString().md>)
+- [MotionPathPlugin.sliceRawPath](</docs/v3/Plugins/MotionPathPlugin/static.sliceRawPath().md>)
+- [MotionPathPlugin.stringToRawPath](</docs/v3/Plugins/MotionPathPlugin/static.stringToRawPath().md>)
 
 ##### Observer
 
 - [Observer](/docs/v3/Plugins/Observer.md)
 - [deltaX](/docs/v3/Plugins/Observer/deltaX.md)
 - [deltaY](/docs/v3/Plugins/Observer/deltaY.md)
-- [disable](/docs/v3/Plugins/Observer/disable().md)
-- [enable](/docs/v3/Plugins/Observer/enable().md)
+- [disable](</docs/v3/Plugins/Observer/disable().md>)
+- [enable](</docs/v3/Plugins/Observer/enable().md>)
 - [event](/docs/v3/Plugins/Observer/event.md)
 - [isDragging](/docs/v3/Plugins/Observer/isDragging.md)
 - [isEnabled](/docs/v3/Plugins/Observer/isEnabled.md)
 - [isPressed](/docs/v3/Plugins/Observer/isPressed.md)
-- [kill](/docs/v3/Plugins/Observer/kill().md)
+- [kill](</docs/v3/Plugins/Observer/kill().md>)
 - [startX](/docs/v3/Plugins/Observer/startX.md)
 - [startY](/docs/v3/Plugins/Observer/startY.md)
-- [Observer.create](/docs/v3/Plugins/Observer/static.create().md)
-- [Observer.getAll](/docs/v3/Plugins/Observer/static.getAll().md)
-- [Observer.getById](/docs/v3/Plugins/Observer/static.getById().md)
+- [Observer.create](</docs/v3/Plugins/Observer/static.create().md>)
+- [Observer.getAll](</docs/v3/Plugins/Observer/static.getAll().md>)
+- [Observer.getById](</docs/v3/Plugins/Observer/static.getById().md>)
 - [Observer.isTouch](/docs/v3/Plugins/Observer/static.isTouch.md)
 - [target](/docs/v3/Plugins/Observer/target.md)
 - [vars](/docs/v3/Plugins/Observer/vars.md)
@@ -377,7 +471,7 @@
 ##### Pixi
 
 - [Pixi](/docs/v3/Plugins/PixiPlugin.md)
-- [PixiPlugin.registerPIXI](/docs/v3/Plugins/PixiPlugin/static.registerPIXI().md)
+- [PixiPlugin.registerPIXI](</docs/v3/Plugins/PixiPlugin/static.registerPIXI().md>)
 
 ##### ScrambleText
 
@@ -386,73 +480,73 @@
 ##### ScrollSmoother
 
 - [ScrollSmoother](/docs/v3/Plugins/ScrollSmoother.md)
-- [.content](/docs/v3/Plugins/ScrollSmoother/content().md)
-- [.effects](/docs/v3/Plugins/ScrollSmoother/effects().md)
-- [.getVelocity](/docs/v3/Plugins/ScrollSmoother/getVelocity().md)
-- [.kill](/docs/v3/Plugins/ScrollSmoother/kill().md)
-- [.offset](/docs/v3/Plugins/ScrollSmoother/offset().md)
-- [.paused](/docs/v3/Plugins/ScrollSmoother/paused().md)
+- [.content](</docs/v3/Plugins/ScrollSmoother/content().md>)
+- [.effects](</docs/v3/Plugins/ScrollSmoother/effects().md>)
+- [.getVelocity](</docs/v3/Plugins/ScrollSmoother/getVelocity().md>)
+- [.kill](</docs/v3/Plugins/ScrollSmoother/kill().md>)
+- [.offset](</docs/v3/Plugins/ScrollSmoother/offset().md>)
+- [.paused](</docs/v3/Plugins/ScrollSmoother/paused().md>)
 - [.progress](/docs/v3/Plugins/ScrollSmoother/progress.md)
-- [.scrollTo](/docs/v3/Plugins/ScrollSmoother/scrollTo().md)
-- [.scrollTop](/docs/v3/Plugins/ScrollSmoother/scrollTop().md)
+- [.scrollTo](</docs/v3/Plugins/ScrollSmoother/scrollTo().md>)
+- [.scrollTop](</docs/v3/Plugins/ScrollSmoother/scrollTop().md>)
 - [.scrollTrigger](/docs/v3/Plugins/ScrollSmoother/scrollTrigger.md)
-- [.smooth](/docs/v3/Plugins/ScrollSmoother/smooth().md)
-- [ScrollSmoother.create](/docs/v3/Plugins/ScrollSmoother/static.create().md)
-- [ScrollSmoother.get](/docs/v3/Plugins/ScrollSmoother/static.get().md)
+- [.smooth](</docs/v3/Plugins/ScrollSmoother/smooth().md>)
+- [ScrollSmoother.create](</docs/v3/Plugins/ScrollSmoother/static.create().md>)
+- [ScrollSmoother.get](</docs/v3/Plugins/ScrollSmoother/static.get().md>)
 - [.vars](/docs/v3/Plugins/ScrollSmoother/vars.md)
-- [.wrapper](/docs/v3/Plugins/ScrollSmoother/wrapper().md)
+- [.wrapper](</docs/v3/Plugins/ScrollSmoother/wrapper().md>)
 
 ##### ScrollTo
 
 - [ScrollTo](/docs/v3/Plugins/ScrollToPlugin.md)
-- [ScrollToPlugin.config](/docs/v3/Plugins/ScrollToPlugin/config().md)
+- [ScrollToPlugin.config](</docs/v3/Plugins/ScrollToPlugin/config().md>)
 
 ##### ScrollTrigger
 
 - [ScrollTrigger](/docs/v3/Plugins/ScrollTrigger.md)
 - [.animation](/docs/v3/Plugins/ScrollTrigger/animation.md)
 - [.direction](/docs/v3/Plugins/ScrollTrigger/direction.md)
-- [.disable](/docs/v3/Plugins/ScrollTrigger/disable().md)
-- [.enable](/docs/v3/Plugins/ScrollTrigger/enable().md)
+- [.disable](</docs/v3/Plugins/ScrollTrigger/disable().md>)
+- [.enable](</docs/v3/Plugins/ScrollTrigger/enable().md>)
 - [.end](/docs/v3/Plugins/ScrollTrigger/end.md)
-- [.getTween](/docs/v3/Plugins/ScrollTrigger/getTween().md)
-- [.getVelocity](/docs/v3/Plugins/ScrollTrigger/getVelocity().md)
+- [.getTween](</docs/v3/Plugins/ScrollTrigger/getTween().md>)
+- [.getVelocity](</docs/v3/Plugins/ScrollTrigger/getVelocity().md>)
 - [.isActive](/docs/v3/Plugins/ScrollTrigger/isActive.md)
-- [.kill](/docs/v3/Plugins/ScrollTrigger/kill().md)
-- [.labelToScroll](/docs/v3/Plugins/ScrollTrigger/labelToScroll().md)
-- [.next](/docs/v3/Plugins/ScrollTrigger/next().md)
+- [.kill](</docs/v3/Plugins/ScrollTrigger/kill().md>)
+- [.labelToScroll](</docs/v3/Plugins/ScrollTrigger/labelToScroll().md>)
+- [.next](</docs/v3/Plugins/ScrollTrigger/next().md>)
 - [.pin](/docs/v3/Plugins/ScrollTrigger/pin.md)
-- [.previous](/docs/v3/Plugins/ScrollTrigger/previous().md)
+- [.previous](</docs/v3/Plugins/ScrollTrigger/previous().md>)
 - [progress](/docs/v3/Plugins/ScrollTrigger/progress.md)
-- [.refresh](/docs/v3/Plugins/ScrollTrigger/refresh().md)
-- [.scroll](/docs/v3/Plugins/ScrollTrigger/scroll().md)
+- [.refresh](</docs/v3/Plugins/ScrollTrigger/refresh().md>)
+- [.scroll](</docs/v3/Plugins/ScrollTrigger/scroll().md>)
 - [scroller](/docs/v3/Plugins/ScrollTrigger/scroller.md)
 - [start](/docs/v3/Plugins/ScrollTrigger/start.md)
-- [ScrollTrigger.addEventListener](/docs/v3/Plugins/ScrollTrigger/static.addEventListener().md)
-- [ScrollTrigger.batch](/docs/v3/Plugins/ScrollTrigger/static.batch().md)
-- [ScrollTrigger.clearMatchMedia](/docs/v3/Plugins/ScrollTrigger/static.clearMatchMedia().md)
-- [ScrollTrigger.clearScrollMemory](/docs/v3/Plugins/ScrollTrigger/static.clearScrollMemory().md)
-- [ScrollTrigger.config](/docs/v3/Plugins/ScrollTrigger/static.config().md)
-- [ScrollTrigger.create](/docs/v3/Plugins/ScrollTrigger/static.create().md)
-- [ScrollTrigger.defaults](/docs/v3/Plugins/ScrollTrigger/static.defaults().md)
-- [ScrollTrigger.getAll](/docs/v3/Plugins/ScrollTrigger/static.getAll().md)
-- [ScrollTrigger.getById](/docs/v3/Plugins/ScrollTrigger/static.getById().md)
-- [ScrollTrigger.isInViewport](/docs/v3/Plugins/ScrollTrigger/static.isInViewport().md)
-- [ScrollTrigger.isScrolling](/docs/v3/Plugins/ScrollTrigger/static.isScrolling().md)
+- [ScrollTrigger.addEventListener](</docs/v3/Plugins/ScrollTrigger/static.addEventListener().md>)
+- [ScrollTrigger.batch](</docs/v3/Plugins/ScrollTrigger/static.batch().md>)
+- [ScrollTrigger.clearMatchMedia](</docs/v3/Plugins/ScrollTrigger/static.clearMatchMedia().md>)
+- [ScrollTrigger.clearScrollMemory](</docs/v3/Plugins/ScrollTrigger/static.clearScrollMemory().md>)
+- [ScrollTrigger.config](</docs/v3/Plugins/ScrollTrigger/static.config().md>)
+- [ScrollTrigger.create](</docs/v3/Plugins/ScrollTrigger/static.create().md>)
+- [ScrollTrigger.defaults](</docs/v3/Plugins/ScrollTrigger/static.defaults().md>)
+- [ScrollTrigger.getAll](</docs/v3/Plugins/ScrollTrigger/static.getAll().md>)
+- [ScrollTrigger.getById](</docs/v3/Plugins/ScrollTrigger/static.getById().md>)
+- [ScrollTrigger.isInViewport](</docs/v3/Plugins/ScrollTrigger/static.isInViewport().md>)
+- [ScrollTrigger.isScrolling](</docs/v3/Plugins/ScrollTrigger/static.isScrolling().md>)
 - [ScrollTrigger.isTouch](/docs/v3/Plugins/ScrollTrigger/static.isTouch.md)
-- [ScrollTrigger.killAll](/docs/v3/Plugins/ScrollTrigger/static.killAll().md)
-- [ScrollTrigger.matchMedia](/docs/v3/Plugins/ScrollTrigger/static.matchMedia().md)
-- [ScrollTrigger.maxScroll](/docs/v3/Plugins/ScrollTrigger/static.maxScroll().md)
-- [ScrollTrigger.normalizeScroll](/docs/v3/Plugins/ScrollTrigger/static.normalizeScroll().md)
-- [ScrollTrigger.observe](/docs/v3/Plugins/ScrollTrigger/static.observe().md)
-- [ScrollTrigger.positionInViewport](/docs/v3/Plugins/ScrollTrigger/static.positionInViewport().md)
-- [ScrollTrigger.refresh](/docs/v3/Plugins/ScrollTrigger/static.refresh().md)
-- [ScrollTrigger.removeEventListener](/docs/v3/Plugins/ScrollTrigger/static.removeEventListener().md)
-- [ScrollTrigger.saveStyles](/docs/v3/Plugins/ScrollTrigger/static.saveStyles().md)
-- [ScrollTrigger.scrollerProxy](/docs/v3/Plugins/ScrollTrigger/static.scrollerProxy().md)
-- [ScrollTrigger.snapDirectional](/docs/v3/Plugins/ScrollTrigger/static.snapDirectional().md)
-- [ScrollTrigger.sort](/docs/v3/Plugins/ScrollTrigger/static.sort().md)
-- [ScrollTrigger.update](/docs/v3/Plugins/ScrollTrigger/static.update().md)
+- [ScrollTrigger.killAll](</docs/v3/Plugins/ScrollTrigger/static.killAll().md>)
+- [ScrollTrigger.matchMedia](</docs/v3/Plugins/ScrollTrigger/static.matchMedia().md>)
+- [ScrollTrigger.maxScroll](</docs/v3/Plugins/ScrollTrigger/static.maxScroll().md>)
+- [ScrollTrigger.normalizeScroll](</docs/v3/Plugins/ScrollTrigger/static.normalizeScroll().md>)
+- [ScrollTrigger.observe](</docs/v3/Plugins/ScrollTrigger/static.observe().md>)
+- [ScrollTrigger.positionInViewport](</docs/v3/Plugins/ScrollTrigger/static.positionInViewport().md>)
+- [ScrollTrigger.refresh](</docs/v3/Plugins/ScrollTrigger/static.refresh().md>)
+- [ScrollTrigger.removeEventListener](</docs/v3/Plugins/ScrollTrigger/static.removeEventListener().md>)
+- [ScrollTrigger.saveStyles](</docs/v3/Plugins/ScrollTrigger/static.saveStyles().md>)
+- [ScrollTrigger.scrollerProxy](</docs/v3/Plugins/ScrollTrigger/static.scrollerProxy().md>)
+- [ScrollTrigger.snapDirectional](</docs/v3/Plugins/ScrollTrigger/static.snapDirectional().md>)
+- [ScrollTrigger.sort](</docs/v3/Plugins/ScrollTrigger/static.sort().md>)
+- [ScrollTrigger.update](</docs/v3/Plugins/ScrollTrigger/static.update().md>)
 - [.trigger](/docs/v3/Plugins/ScrollTrigger/trigger.md)
 - [.vars](/docs/v3/Plugins/ScrollTrigger/vars.md)
 
@@ -461,12 +555,12 @@
 - [SplitText](/docs/v3/Plugins/SplitText.md)
 - [chars](/docs/v3/Plugins/SplitText/chars.md)
 - [isSplit](/docs/v3/Plugins/SplitText/isSplit.md)
-- [kill](/docs/v3/Plugins/SplitText/kill().md)
+- [kill](</docs/v3/Plugins/SplitText/kill().md>)
 - [lines](/docs/v3/Plugins/SplitText/lines.md)
 - [masks](/docs/v3/Plugins/SplitText/masks.md)
-- [revert](/docs/v3/Plugins/SplitText/revert().md)
-- [split](/docs/v3/Plugins/SplitText/split().md)
-- [SplitText.create](/docs/v3/Plugins/SplitText/static.create().md)
+- [revert](</docs/v3/Plugins/SplitText/revert().md>)
+- [split](</docs/v3/Plugins/SplitText/split().md>)
+- [SplitText.create](</docs/v3/Plugins/SplitText/static.create().md>)
 - [.vars](/docs/v3/Plugins/SplitText/vars.md)
 - [words](/docs/v3/Plugins/SplitText/words.md)
 
@@ -476,19 +570,18 @@
 
 #### MotionPathHelper
 
-
 ##### kill()
 
-- [kill](/docs/v3/MotionPathHelper/kill().md)
+- [kill](</docs/v3/MotionPathHelper/kill().md>)
 
 ##### static.editPath()
 
-- [MotionPathHelper.editPath](/docs/v3/MotionPathHelper/static.editPath().md)
+- [MotionPathHelper.editPath](</docs/v3/MotionPathHelper/static.editPath().md>)
 
 ## Resources
 
-- [Unlock the 
- power of GSAP](/resources.md)
+- [Unlock the
+  power of GSAP](/resources.md)
 - [updating to GSAP 3](/resources/3-migration.md)
 - [Accessible Animation](/resources/a11y.md)
 - [Handling conflicting tweens](/resources/conflict.md)

@@ -3,8 +3,10 @@ import { bars, gifts, media } from '../content/site'
 /** Все фото лендинга — грузим до кадров Hero, чтобы секции не «вспыхивали». */
 export const siteImageUrls: string[] = [
   media.logo,
+  media.welcome,
   media.aboutHero,
   media.aboutSecondary,
+  media.aboutTertiary,
   media.privateLabel,
   ...media.ornaments,
   ...bars.map((bar) => bar.image),

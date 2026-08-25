@@ -53,3 +53,22 @@
 .filigree--in-showcase .filigree__svg {
   width: min(420px, 70vw);
 }
+
+.filigree--welcome {
+  justify-content: flex-start;
+  background: transparent;
+  min-height: 0;
+  padding: 0;
+  color: var(--color-gold);
+  opacity: 0.85;
+}
+
+.filigree--welcome .filigree__svg {
+  width: min(340px, 62vw);
+}
+
+@media (max-width: 960px) {
+  .filigree--welcome {
+    justify-content: center;
+  }
+}

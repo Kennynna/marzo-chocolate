@@ -42,6 +42,9 @@ export function AboutSection() {
           <div className="about__photo about__photo--secondary frame-brackets" data-reveal>
             <MediaImage src={media.aboutSecondary} alt="Производство шоколада MARZO" priority />
           </div>
+          <div className="about__photo about__photo--tertiary frame-brackets" data-reveal>
+            <MediaImage src={media.aboutTertiary} alt="Шоколад MARZO" priority />
+          </div>
           <div className="about__ornaments" aria-hidden>
             {media.ornaments.map((src, i) => (
               <img key={src} className={`about__ornament about__ornament--${i + 1}`} src={src} alt="" />
