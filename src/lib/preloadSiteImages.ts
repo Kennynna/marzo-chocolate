@@ -27,9 +27,21 @@ function loadOne(src: string): Promise<void> {
 
 let pending: Promise<void> | null = null
 
-export function preloadSiteImages(): Promise<void> {
+export function preloadSiteImages(
+  onProgress?: (loaded: number, total: number) => void,
+): Promise<void> {
   if (!pending) {
-    pending = Promise.all(siteImageUrls.map(loadOne)).then(() => undefined)
+    const total = siteImageUrls.length
+    let loaded = 0
+
+    pending = Promise.all(
+      siteImageUrls.map((src) =>
+        loadOne(src).then(() => {
+          loaded += 1
+          onProgress?.(loaded, total)
+        }),
+      ),
+    ).then(() => undefined)
   }
   return pending
 }

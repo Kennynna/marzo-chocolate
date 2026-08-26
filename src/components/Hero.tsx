@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { scrollCue } from '../content/site'
 import { heroFrames } from '../lib/scrollFrames'
 import { useScrollFrameSection } from '../lib/useScrollFrameSection'
 import './ScrollFrameSection.css'
@@ -45,7 +46,7 @@ export function Hero() {
 
         {!reduced && (
           <div className="scroll-frames__scroll-hint" ref={hintRef} aria-hidden>
-            <span>scroll</span>
+            <span>{scrollCue.label}</span>
           </div>
         )}
       </div>

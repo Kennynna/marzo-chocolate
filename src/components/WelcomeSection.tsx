@@ -1,11 +1,17 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
-import { brand, media, welcome } from '../content/site'
+import { brand, media, proverb, welcome } from '../content/site'
+import { useBootReady } from '../lib/bootLoader'
 import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap'
 import { REVEAL_EASE } from '../lib/motion'
 import { FiligreeOrnament } from './FiligreeOrnament'
 import { Reveal, RevealWords } from './Reveal'
 import './WelcomeSection.css'
+
+/** Медленное всплытие света, после него — раскрыв круга */
+const AURA_FADE = 0.75
+const CIRCLE_CLOSED = 'circle(0% at 50% 52%)'
+const CIRCLE_OPEN = 'circle(120% at 50% 52%)'
 
 export function WelcomeSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -13,6 +19,9 @@ export function WelcomeSection() {
   const copyRef = useRef<HTMLDivElement>(null)
   const visualRef = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
+  const booted = useBootReady()
+  /** Появление стартует только когда лоадер ушёл, иначе каскад играет вслепую */
+  const play = booted || Boolean(reduced)
 
   useGSAP(
     () => {
@@ -59,78 +68,151 @@ export function WelcomeSection() {
       aria-label="Приветствие MARZO"
     >
       <div className="welcome__stage" ref={stageRef}>
-        <div className="welcome__grain" aria-hidden />
-        <div className="welcome__frame" aria-hidden />
+        <motion.div
+          className="welcome__atmosphere"
+          aria-hidden
+          initial={reduced ? undefined : { opacity: 0 }}
+          animate={reduced || !play ? undefined : { opacity: 1 }}
+          transition={{ duration: AURA_FADE, ease: 'easeOut' }}
+        >
+          <div className="welcome__aura" />
+          <div className="welcome__grain" />
+          <div className="welcome__frame" />
+        </motion.div>
 
-        <div className="welcome__inner">
-          <div className="welcome__copy" ref={copyRef}>
-            <Reveal className="welcome__eyebrow" immediate delay={0.15} y={14} duration={0.7}>
-              <span className="welcome__eyebrow-rule" aria-hidden />
-              {welcome.eyebrow}
-            </Reveal>
+        <motion.div
+          className="welcome__reveal"
+          initial={reduced ? undefined : { clipPath: CIRCLE_CLOSED }}
+          animate={reduced || !play ? undefined : { clipPath: CIRCLE_OPEN }}
+          transition={{ duration: 0.85, delay: AURA_FADE, ease: REVEAL_EASE }}
+        >
+          <Reveal
+            className="welcome__proverb"
+            immediate
+            play={play}
+            delay={AURA_FADE + 0.28}
+            y={12}
+            duration={0.6}
+          >
+            <span className="welcome__proverb-quote" aria-hidden>
+              “
+            </span>
+            <blockquote className="welcome__proverb-text">{proverb.original}</blockquote>
+            <span className="welcome__proverb-translation">{proverb.translation}</span>
+            <span className="welcome__proverb-source">{proverb.source}</span>
+          </Reveal>
 
-            <h1 className="welcome__heading">
-              <RevealWords
-                className="welcome__wordmark"
-                text={brand.name}
+          <div className="welcome__inner">
+            <div className="welcome__copy" ref={copyRef}>
+              <Reveal
+                className="welcome__eyebrow"
                 immediate
-                delay={0.3}
-                duration={1.1}
-              />
-              <RevealWords className="welcome__title" text={welcome.title} immediate delay={0.55} />
-            </h1>
+                play={play}
+                delay={AURA_FADE + 0.08}
+                y={12}
+                duration={0.5}
+              >
+                <span className="welcome__eyebrow-rule" aria-hidden />
+                {welcome.eyebrow}
+              </Reveal>
 
-            <Reveal className="welcome__filigree" immediate delay={0.9} y={10} duration={1}>
-              <FiligreeOrnament className="filigree--welcome" animate={false} />
-            </Reveal>
+              <h1 className="welcome__heading">
+                <RevealWords
+                  className="welcome__wordmark"
+                  text={brand.name}
+                  immediate
+                  play={play}
+                  delay={AURA_FADE + 0.14}
+                  duration={0.7}
+                />
+                <RevealWords
+                  className="welcome__title"
+                  text={welcome.title}
+                  immediate
+                  play={play}
+                  delay={AURA_FADE + 0.24}
+                  duration={0.6}
+                  stagger={0.04}
+                />
+              </h1>
 
-            <ul className="welcome__meta">
-              {welcome.meta.map((item, index) => (
-                <motion.li
-                  key={item}
-                  className="welcome__meta-item"
-                  initial={reduced ? undefined : { opacity: 0, y: 14 }}
-                  animate={reduced ? undefined : { opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1 + index * 0.1, ease: REVEAL_EASE }}
-                >
-                  {item}
-                </motion.li>
-              ))}
-            </ul>
+              <Reveal
+                className="welcome__filigree"
+                immediate
+                play={play}
+                delay={AURA_FADE + 0.4}
+                y={8}
+                duration={0.6}
+              >
+                <FiligreeOrnament className="filigree--welcome" animate={false} />
+              </Reveal>
+
+              <ul className="welcome__meta">
+                {welcome.meta.map((item, index) => (
+                  <motion.li
+                    key={item}
+                    className="welcome__meta-item"
+                    initial={reduced ? undefined : { opacity: 0, y: 12 }}
+                    animate={reduced || !play ? undefined : { opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.45,
+                      delay: AURA_FADE + 0.46 + index * 0.07,
+                      ease: REVEAL_EASE,
+                    }}
+                  >
+                    {item}
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="welcome__visual" ref={visualRef}>
+              <span className="welcome__arch-echo" aria-hidden />
+
+              <motion.div
+                className="welcome__arch"
+                initial={reduced ? undefined : { clipPath: 'inset(100% 0% 0% 0%)' }}
+                animate={reduced || !play ? undefined : { clipPath: 'inset(0% 0% 0% 0%)' }}
+                transition={{ duration: 0.8, delay: AURA_FADE + 0.12, ease: REVEAL_EASE }}
+              >
+                <motion.img
+                  className="welcome__photo"
+                  src={media.welcome}
+                  alt=""
+                  decoding="async"
+                  fetchPriority="high"
+                  initial={reduced ? undefined : { scale: 1.16 }}
+                  animate={reduced || !play ? undefined : { scale: 1 }}
+                  transition={{ duration: 1.4, delay: AURA_FADE + 0.12, ease: REVEAL_EASE }}
+                />
+                <span className="welcome__photo-shade" aria-hidden />
+              </motion.div>
+
+              <Reveal
+                className="welcome__caption"
+                immediate
+                play={play}
+                delay={AURA_FADE + 0.56}
+                y={10}
+                duration={0.5}
+              >
+                {welcome.caption}
+              </Reveal>
+            </div>
           </div>
 
-          <div className="welcome__visual" ref={visualRef}>
-            <span className="welcome__arch-echo" aria-hidden />
-
-            <motion.div
-              className="welcome__arch"
-              initial={reduced ? undefined : { clipPath: 'inset(100% 0% 0% 0%)' }}
-              animate={reduced ? undefined : { clipPath: 'inset(0% 0% 0% 0%)' }}
-              transition={{ duration: 1.35, delay: 0.25, ease: REVEAL_EASE }}
-            >
-              <motion.img
-                className="welcome__photo"
-                src={media.welcome}
-                alt=""
-                decoding="async"
-                fetchPriority="high"
-                initial={reduced ? undefined : { scale: 1.18 }}
-                animate={reduced ? undefined : { scale: 1 }}
-                transition={{ duration: 1.8, delay: 0.25, ease: REVEAL_EASE }}
-              />
-              <span className="welcome__photo-shade" aria-hidden />
-            </motion.div>
-
-            <Reveal className="welcome__caption" immediate delay={1.2} y={12} duration={0.7}>
-              {welcome.caption}
-            </Reveal>
-          </div>
-        </div>
-
-        <Reveal className="welcome__cue" immediate delay={1.4} y={0} duration={0.8}>
-          <span className="welcome__cue-label">{welcome.scrollHint}</span>
-          <span className="welcome__cue-line" aria-hidden />
-        </Reveal>
+          <Reveal
+            className="welcome__cue"
+            immediate
+            play={play}
+            delay={AURA_FADE + 0.66}
+            y={0}
+            duration={0.6}
+          >
+            <span className="welcome__cue-label">{welcome.scrollHint}</span>
+            <span className="welcome__cue-line" aria-hidden />
+          </Reveal>
+        </motion.div>
       </div>
     </section>
   )

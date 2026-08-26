@@ -17,7 +17,7 @@ type Breakpointed = { desktop: number; mobile: number }
  * покадровая анимация секции на это время стоит на первом кадре.
  */
 type ZoomMaskConfig = {
-  svgRef: RefObject<SVGSVGElement | null>
+  svgRef: RefObject<HTMLElement | SVGSVGElement | null>
   /** Группа с фигурой выреза, центрированной относительно своего origin */
   shapeRef: RefObject<SVGGElement | null>
   /** Доля общего скролла секции, отданная под этап 1 */
@@ -158,6 +158,9 @@ export function useScrollFrameSection({
       applyPosterSurface(section, posterPath)
       applyPosterSurface(stageRef?.current, posterPath)
 
+      const maskSvg = zoomMask?.svgRef.current
+      const maskShape = zoomMask?.shapeRef.current
+
       const paint = (scrollProgress: number) => {
         const frames = framesRef.current
         if (!frames.length) return
@@ -169,6 +172,19 @@ export function useScrollFrameSection({
           canvas.clientHeight,
           lastFrameRef,
         )
+      }
+
+      // После этапа 1 SVG прячем классом, а не autoAlpha: visibility на маске
+      // в Chrome при reverse даёт мерцание выреза. Гистерезис — чтобы Lenis
+      // не дёргал слой на границе gate.
+      const syncZoomLayer = (scrollProgress: number) => {
+        if (!maskSvg) return
+        const hidden = maskSvg.classList.contains('is-complete')
+        if (!hidden && scrollProgress >= gate) {
+          maskSvg.classList.add('is-complete')
+        } else if (hidden && scrollProgress < gate - 0.012) {
+          maskSvg.classList.remove('is-complete')
+        }
       }
 
       const resize = () => {
@@ -211,6 +227,7 @@ export function useScrollFrameSection({
           onUpdate: (self) => {
             progressRef.current = self.progress
             paint(self.progress)
+            syncZoomLayer(self.progress)
           },
         },
       })
@@ -220,17 +237,14 @@ export function useScrollFrameSection({
       })
       syncPinSpacerPoster(section, posterPath)
 
-      const maskSvg = zoomMask?.svgRef.current
-      const maskShape = zoomMask?.shapeRef.current
-
       if (gate > 0 && zoomMask && maskSvg && maskShape) {
         const { shapeOrigin, shapeScaleFrom, shapeScaleTo } = zoomMask
         const scaleTo = zoomMask.scaleTo ?? { desktop: 6.4, mobile: 4.2 }
 
-        gsap.set(maskSvg, { autoAlpha: 1, scale: 1, transformOrigin: 'center center' })
+        // Не трогаем CSS-transform/autoAlpha SVG: в Chrome маска мерцает при reverse.
+        gsap.set(maskSvg, { force3D: false, clearProps: 'transform,opacity,visibility' })
+        maskSvg.classList.remove('is-complete')
 
-        // Пишем SVG-transform руками: вектор пересчитывается каждый кадр и не мылится,
-        // а GSAP не трогает getBBox у элемента внутри <mask>.
         const shapeState = { scale: shapeScaleFrom }
         const applyShapeScale = () => {
           maskShape.setAttribute(
@@ -240,9 +254,17 @@ export function useScrollFrameSection({
         }
         applyShapeScale()
 
-        const crispPhase = gate * 0.62
-        // Пролёт внутрь фигуры — композитным transform, размытие скрывает fade.
-        const throughPhase = gate - crispPhase
+        // Подписи уходят раньше сердца: labelPhase целиком отдан их затуханию
+        const caption = zoomMask.captionRef?.current
+        const labelPhase = caption ? gate * 0.22 : 0
+        const zoomSpan = gate - labelPhase
+        const crispPhase = zoomSpan * 0.62
+        const throughPhase = zoomSpan - crispPhase
+
+        if (caption) {
+          gsap.set(caption, { opacity: 1 })
+          timeline.to(caption, { opacity: 0, duration: labelPhase * 0.8 }, 0)
+        }
 
         timeline.to(
           shapeState,
@@ -251,24 +273,30 @@ export function useScrollFrameSection({
             duration: crispPhase,
             onUpdate: applyShapeScale,
           },
-          0,
+          labelPhase,
         )
-        const caption = zoomMask.captionRef?.current
-        if (caption) {
-          gsap.set(caption, { autoAlpha: 1 })
-          timeline.to(caption, { autoAlpha: 0, duration: crispPhase * 0.45 }, 0)
-        }
 
+        // Пролёт — масштаб сердца в SVG-атрибуте; плиту гасим attr-opacity,
+        // без CSS-слоя на корневом SVG.
         timeline.to(
-          maskSvg,
+          shapeState,
           {
-            scale: () => pickByViewport(scaleTo),
-            autoAlpha: 0,
-            force3D: true,
+            scale: () => pickByViewport(shapeScaleTo) * pickByViewport(scaleTo),
             duration: throughPhase,
+            onUpdate: applyShapeScale,
           },
-          crispPhase,
+          labelPhase + crispPhase,
         )
+        const plate = maskSvg.querySelector('g[mask]')
+        if (plate) {
+          gsap.set(plate, { attr: { opacity: 1 } })
+          timeline.to(
+            plate,
+            { attr: { opacity: 0 }, duration: throughPhase },
+            labelPhase + crispPhase,
+          )
+        }
+        syncZoomLayer(progressRef.current)
       }
 
       if (fadeContent && contentRef?.current) {

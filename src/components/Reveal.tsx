@@ -17,6 +17,8 @@ type RevealProps = {
   y?: number
   /** Играть сразу после монтирования, а не по появлению во вьюпорте */
   immediate?: boolean
+  /** Придержать immediate-анимацию, пока внешнее условие не выполнено */
+  play?: boolean
   amount?: number
 }
 
@@ -27,20 +29,22 @@ export function Reveal({
   duration = 0.85,
   y = 28,
   immediate = false,
+  play = true,
   amount = 0.3,
 }: RevealProps) {
   const reduced = useReducedMotion()
 
   if (reduced) return <div className={className}>{children}</div>
 
+  const hidden = { opacity: 0, y }
   const shown = { opacity: 1, y: 0 }
 
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y }}
+      initial={hidden}
       {...(immediate
-        ? { animate: shown }
+        ? { animate: play ? shown : hidden }
         : { whileInView: shown, viewport: { once: true, amount } })}
       transition={{ duration, delay, ease: REVEAL_EASE }}
     >
@@ -57,6 +61,7 @@ type RevealWordsProps = {
   duration?: number
   stagger?: number
   immediate?: boolean
+  play?: boolean
   amount?: number
 }
 
@@ -69,6 +74,7 @@ export function RevealWords({
   duration = 0.9,
   stagger = 0.055,
   immediate = false,
+  play = true,
   amount = 0.4,
 }: RevealWordsProps) {
   const reduced = useReducedMotion()
@@ -84,7 +90,7 @@ export function RevealWords({
           className="reveal-words__word"
           initial={{ y: '112%' }}
           {...(immediate
-            ? { animate: { y: '0%' } }
+            ? { animate: { y: play ? '0%' : '112%' } }
             : { whileInView: { y: '0%' }, viewport: { once: true, amount } })}
           transition={{ duration, delay: delay + index * stagger, ease: REVEAL_EASE }}
         >

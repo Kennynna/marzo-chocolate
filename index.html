@@ -4,10 +4,307 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#161e05" />
     <title>MARZO</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap"
+    />
+
+    <!--
+      Бут-лоадер живёт в index.html и намеренно не использует токены дизайн-системы:
+      он должен отрисоваться до того, как загрузится основной бандл со стилями.
+    -->
+    <style>
+      html.boot-lock,
+      html.boot-lock body {
+        overflow: hidden;
+      }
+
+      .boot {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: linear-gradient(180deg, #161e05 0%, #121804 64%, #0f1403 100%);
+        color: #e7dfcc;
+        transition: opacity 0.6s ease;
+      }
+
+      .boot--done {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .boot__inner {
+        width: min(420px, 84vw);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(16px, 3vh, 26px);
+      }
+
+      /* line-height: 1 держит высоту строки от кегля, а не от шрифта —
+         подмена фолбэка на Tenor Sans не сдвигает полосу ниже */
+      .boot__mark {
+        font-family: 'Tenor Sans', Georgia, 'Times New Roman', serif;
+        font-size: clamp(32px, 9vw, 50px);
+        line-height: 1;
+        letter-spacing: 0.3em;
+        text-indent: 0.3em;
+        color: #ecc183;
+        opacity: 0;
+        transition: opacity 0.45s ease;
+        animation: boot-float 5.2s ease-in-out infinite;
+      }
+
+      .boot__mark--ready {
+        opacity: 1;
+      }
+
+      .boot__tagline {
+        font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+        font-size: clamp(9px, 2.4vw, 11px);
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(231, 223, 204, 0.45);
+      }
+
+      /* Полоса-плитка: заливка + разделители сегментов + искра на кромке */
+      .boot__bar {
+        position: relative;
+        width: 100%;
+        height: 5px;
+        margin-top: clamp(4px, 2vh, 14px);
+        border-radius: 3px;
+        background: rgba(231, 223, 204, 0.12);
+      }
+
+      .boot__fill {
+        position: absolute;
+        inset: 0;
+        border-radius: 3px;
+        transform-origin: left center;
+        transform: scaleX(calc(var(--p, 0) / 100));
+        background: linear-gradient(90deg, #d2a769 0%, #ecc183 62%, #f7e5c4 100%);
+      }
+
+      .boot__segments {
+        position: absolute;
+        inset: 0;
+        border-radius: 3px;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent 0 calc(12.5% - 1px),
+          rgba(15, 20, 3, 0.6) calc(12.5% - 1px) 12.5%
+        );
+      }
+
+      .boot__spark {
+        position: absolute;
+        top: 50%;
+        left: calc(var(--p, 0) * 1%);
+        width: 10px;
+        height: 10px;
+        margin: -5px 0 0 -5px;
+        border-radius: 50%;
+        background: #f7e5c4;
+        box-shadow: 0 0 14px 3px rgba(236, 193, 131, 0.5);
+        opacity: 0.9;
+        animation: boot-pulse 1.8s ease-in-out infinite;
+      }
+
+      .boot__meta {
+        display: flex;
+        width: 100%;
+        align-items: baseline;
+        justify-content: space-between;
+        font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(231, 223, 204, 0.5);
+      }
+
+      .boot__pct {
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        color: #ecc183;
+        font-variant-numeric: tabular-nums;
+      }
+
+      @keyframes boot-float {
+        0%,
+        100% {
+          transform: translate3d(0, -5px, 0);
+        }
+        50% {
+          transform: translate3d(0, 5px, 0);
+        }
+      }
+
+      @keyframes boot-pulse {
+        0%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.7;
+        }
+        50% {
+          transform: scale(1.15);
+          opacity: 1;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .boot__mark,
+        .boot__spark {
+          animation: none;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div
+      class="boot"
+      id="boot"
+      role="progressbar"
+      aria-label="Загрузка сайта MARZO"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    >
+      <div class="boot__inner">
+        <div class="boot__mark" id="boot-mark">MARZO</div>
+        <div class="boot__tagline">шоколадная фабрика</div>
+
+        <div class="boot__bar" id="boot-bar">
+          <div class="boot__fill"></div>
+          <div class="boot__segments"></div>
+          <div class="boot__spark"></div>
+        </div>
+
+        <div class="boot__meta">
+          <span>загрузка</span>
+          <span class="boot__pct" id="boot-pct">0%</span>
+        </div>
+      </div>
+    </div>
+
     <div id="root"></div>
+
+    <script>
+      ;(function () {
+        var boot = document.getElementById('boot')
+        var bar = document.getElementById('boot-bar')
+        var pct = document.getElementById('boot-pct')
+        var mark = document.getElementById('boot-mark')
+        if (!boot || !bar || !pct || !mark) return
+
+        // Логотип проявляем только с готовым Tenor Sans, иначе видна подмена
+        // системного фолбэка на веб-шрифт (font-display: swap)
+        var MARK_FONT = '400 1em "Tenor Sans"'
+        var FONT_WAIT = 1200
+
+        function revealMark() {
+          mark.classList.add('boot__mark--ready')
+        }
+
+        if (document.fonts && document.fonts.check) {
+          var fontDeadline = Date.now() + FONT_WAIT
+          var pollFont = function () {
+            var ready = false
+            try {
+              ready = document.fonts.check(MARK_FONT)
+            } catch (e) {
+              ready = true
+            }
+            if (ready || Date.now() > fontDeadline) {
+              revealMark()
+              return
+            }
+            window.setTimeout(pollFont, 60)
+          }
+          if (document.fonts.load) document.fonts.load(MARK_FONT).catch(function () {})
+          pollFont()
+        } else {
+          revealMark()
+        }
+
+        var shown = 0
+        var target = 4
+        var finishing = false
+        var raf = 0
+        var startedAt = Date.now()
+        var MIN_VISIBLE = 600
+        var MAX_WAIT = 10000
+
+        document.documentElement.classList.add('boot-lock')
+
+        function tick() {
+          if (!finishing) {
+            // Без реальных сигналов синтетический прогресс замедляется и не доходит до 100
+            var elapsed = (Date.now() - startedAt) / 1000
+            var synthetic = 88 * (1 - Math.exp(-elapsed / 2.2))
+            if (synthetic > target) target = synthetic
+          }
+
+          shown += (target - shown) * (finishing ? 0.16 : 0.07)
+          if (finishing && target - shown < 0.5) shown = target
+
+          var value = Math.min(100, Math.round(shown))
+          bar.style.setProperty('--p', shown.toFixed(2))
+          pct.textContent = value + '%'
+          boot.setAttribute('aria-valuenow', String(value))
+
+          if (finishing && value >= 100) {
+            hide()
+            return
+          }
+          raf = requestAnimationFrame(tick)
+        }
+
+        function hide() {
+          cancelAnimationFrame(raf)
+          var wait = Math.max(0, MIN_VISIBLE - (Date.now() - startedAt))
+          window.setTimeout(function () {
+            boot.classList.add('boot--done')
+            document.documentElement.classList.remove('boot-lock')
+            // Появление контента стартует вместе с затуханием лоадера — так быстрее
+            window.__marzoBooted = true
+            window.dispatchEvent(new Event('marzo:booted'))
+            window.setTimeout(function () {
+              if (boot.parentNode) boot.parentNode.removeChild(boot)
+            }, 700)
+          }, wait)
+        }
+
+        window.__marzoBoot = {
+          set: function (value) {
+            if (typeof value !== 'number' || finishing) return
+            // Оставляем хвост под финальный рывок, чтобы 100% совпало с готовностью
+            if (value > target) target = Math.min(value, 96)
+          },
+          done: function () {
+            if (finishing) return
+            finishing = true
+            target = 100
+          },
+        }
+
+        // Страховка: не держим пользователя за лоадером дольше MAX_WAIT
+        window.setTimeout(function () {
+          window.__marzoBoot.done()
+        }, MAX_WAIT)
+
+        raf = requestAnimationFrame(tick)
+      })()
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

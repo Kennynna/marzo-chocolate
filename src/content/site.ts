@@ -33,7 +33,7 @@ export const media = {
   aboutHero: '/dop-1.webp',
   aboutSecondary: '/dop-2.webp',
   aboutTertiary: '/dop-3.webp',
-  privateLabel: '/IMG_6965.webp',
+  privateLabel: '/dop-1.webp',
   ornaments: [
     '/element_1.png.webp',
     '/element_2.png.webp',
@@ -58,6 +58,17 @@ export const welcome = {
   meta: ['без пальмового масла', '100% натуральный состав', 'собственное производство'],
   caption: 'MARZO — вкус традиций',
   scrollHint: 'листайте',
+} as const
+
+export const proverb = {
+  original: 'Хазалла — бӀаьргашна, мерзалла — дагна.',
+  translation: 'Красота — для глаз, сладость — для сердца.',
+  source: 'чеченская пословица',
+} as const
+
+/** Подсказка скролла на покадровых секциях */
+export const scrollCue = {
+  label: 'листайте вниз',
 } as const
 
 export const hero = {
