@@ -48,19 +48,44 @@ export async function preloadFrames(
   return frames
 }
 
-/** Одна очередь: Hero → gifts, без гонки за сеть. */
-let framePreloadQueue: Promise<unknown> = Promise.resolve()
+type FrameJob = {
+  promise: Promise<HTMLImageElement[]>
+  listeners: Array<(loaded: number, total: number) => void>
+  loaded: number
+}
 
+const frameJobs = new Map<string, FrameJob>()
+
+/** Одна загрузка на последовательность: бут-лоадер и секции делят один кэш. */
 export function enqueueFramePreload(
   sequence: FrameSequence,
   onProgress?: (loaded: number, total: number) => void,
 ): Promise<HTMLImageElement[]> {
-  const run = framePreloadQueue.then(() => preloadFrames(sequence, onProgress))
-  framePreloadQueue = run.then(
-    () => undefined,
-    () => undefined,
-  )
-  return run
+  const key = sequence.getPath(0)
+  let job = frameJobs.get(key)
+
+  if (!job) {
+    const listeners: FrameJob['listeners'] = []
+    const promise = preloadFrames(sequence, (loaded, total) => {
+      const current = frameJobs.get(key)
+      if (current) current.loaded = loaded
+      listeners.forEach((fn) => fn(loaded, total))
+    }).then((frames) => {
+      const current = frameJobs.get(key)
+      if (current) current.loaded = sequence.count
+      return frames
+    })
+
+    job = { promise, listeners, loaded: 0 }
+    frameJobs.set(key, job)
+  }
+
+  if (onProgress) {
+    job.listeners.push(onProgress)
+    if (job.loaded > 0) onProgress(job.loaded, sequence.count)
+  }
+
+  return job.promise
 }
 
 function paintFrameCover(

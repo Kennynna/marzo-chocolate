@@ -241,15 +241,17 @@
         var raf = 0
         var startedAt = Date.now()
         var MIN_VISIBLE = 600
-        var MAX_WAIT = 10000
+        // Кадры двух роликов — сотни webp; 10с отпускало лоадер раньше готовности
+        var MAX_WAIT = 180000
 
         document.documentElement.classList.add('boot-lock')
 
         function tick() {
           if (!finishing) {
-            // Без реальных сигналов синтетический прогресс замедляется и не доходит до 100
+            // Синтетика только заполняет паузу до первых реальных сигналов —
+            // дальше шкалу ведут фото и кадры из бандла
             var elapsed = (Date.now() - startedAt) / 1000
-            var synthetic = 88 * (1 - Math.exp(-elapsed / 2.2))
+            var synthetic = 18 * (1 - Math.exp(-elapsed / 1.4))
             if (synthetic > target) target = synthetic
           }
 
