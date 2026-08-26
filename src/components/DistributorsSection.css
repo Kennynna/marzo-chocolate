@@ -1,5 +1,6 @@
 .distributors {
   position: relative;
+  isolation: isolate;
   background: var(--color-forest);
   color: var(--color-cream);
   padding: 120px 48px 120px 88px;

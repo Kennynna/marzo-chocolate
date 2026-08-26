@@ -1,6 +1,7 @@
 import { cta, media, privateLabel } from '../content/site'
 import { useReveal } from '../lib/useReveal'
 import { MediaImage } from './MediaImage'
+import { ScrollOrnamentBand } from './ScrollOrnamentBand'
 import './PrivateLabelSection.css'
 
 export function PrivateLabelSection() {
@@ -8,6 +9,7 @@ export function PrivateLabelSection() {
 
   return (
     <section className="private-label" id={privateLabel.id} ref={ref}>
+      <ScrollOrnamentBand tilt={-31} />
       <span className="section-rail private-label__rail">04 · b2b</span>
       <div className="private-label__band" aria-hidden />
 

@@ -1,6 +1,7 @@
 import { bars, collectionSection, cta, links } from '../content/site'
 import { useReveal } from '../lib/useReveal'
 import { MediaImage } from './MediaImage'
+import { ScrollOrnamentBand } from './ScrollOrnamentBand'
 import './ProductShowcase.css'
 
 export function ProductShowcase() {
@@ -8,6 +9,7 @@ export function ProductShowcase() {
 
   return (
     <section className="showcase" id="product" ref={ref}>
+      <ScrollOrnamentBand tilt="diagonal-up" />
       <span className="section-rail showcase__rail">02 · коллекция</span>
       <span className="ghost-number showcase__ghost-bg">03</span>
 

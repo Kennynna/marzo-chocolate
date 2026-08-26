@@ -1,6 +1,7 @@
 import { cta, gifts, giftsSection, links } from '../content/site'
 import { useReveal } from '../lib/useReveal'
 import { MediaImage } from './MediaImage'
+import { ScrollOrnamentBand } from './ScrollOrnamentBand'
 import './GiftSetsSection.css'
 
 export function GiftSetsSection() {
@@ -8,6 +9,7 @@ export function GiftSetsSection() {
 
   return (
     <section className="gifts" id="gifts" ref={ref}>
+      <ScrollOrnamentBand tilt={9} />
       <span className="section-rail gifts__rail">03 · подарки</span>
       <span className="ghost-number gifts__ghost">gift</span>
 

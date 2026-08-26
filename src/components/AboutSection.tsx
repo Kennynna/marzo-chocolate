@@ -3,6 +3,7 @@ import { aboutFeatures, brand, cta, hero, media } from '../content/site'
 import { gsap, useGSAP } from '../lib/gsap'
 import { useReveal } from '../lib/useReveal'
 import { MediaImage } from './MediaImage'
+import { ScrollOrnamentBand } from './ScrollOrnamentBand'
 import './AboutSection.css'
 
 export function AboutSection() {
@@ -31,6 +32,7 @@ export function AboutSection() {
 
   return (
     <section className="about" id="about" ref={ref}>
+      <ScrollOrnamentBand tone="dark" tilt="diagonal-down" />
       <span className="section-rail">01 · о фабрике</span>
       <span className="section-watermark about__watermark">{brand.name}</span>
 

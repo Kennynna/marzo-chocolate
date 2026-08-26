@@ -1,5 +1,6 @@
 import { cta, distributors, distributorsSection } from '../content/site'
 import { useReveal } from '../lib/useReveal'
+import { ScrollOrnamentBand } from './ScrollOrnamentBand'
 import './DistributorsSection.css'
 
 export function DistributorsSection() {
@@ -7,6 +8,7 @@ export function DistributorsSection() {
 
   return (
     <section className="distributors" id={distributorsSection.id} ref={ref}>
+      <ScrollOrnamentBand tone="dark" tilt={161} />
       <span className="section-rail">05 · партнёрам</span>
       <span className="section-watermark distributors__watermark">partner</span>
 
