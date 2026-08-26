@@ -24,7 +24,8 @@ export function GiftsScrollSection() {
   const hintRef = useRef<HTMLDivElement>(null);
   const zoomSvgRef = useRef<SVGSVGElement>(null);
   const zoomShapeRef = useRef<SVGGElement>(null);
-  const zoomCaptionRef = useRef<SVGTextElement>(null);
+  const zoomFillRef = useRef<SVGGElement>(null);
+  const zoomCaptionRef = useRef<SVGGElement>(null);
 
   const uid = useId().replace(/:/g, "");
   const maskId = `gifts-zoom-mask-${uid}`;
@@ -45,6 +46,7 @@ export function GiftsScrollSection() {
     zoomMask: {
       svgRef: zoomSvgRef,
       shapeRef: zoomShapeRef,
+      fillRef: zoomFillRef,
       captionRef: zoomCaptionRef,
       gateRatio: 0.32,
       shapeOrigin: HEART_CENTER,
@@ -119,6 +121,14 @@ export function GiftsScrollSection() {
               width={PLATE.size}
               height={PLATE.size}
               fill={`url(#${baseId})`}
+            />
+          </g>
+
+          <g ref={zoomFillRef} opacity={1} pointerEvents="none">
+            <path
+              d={HEART_PATH}
+              transform="translate(-16 -14.8)"
+              fill="var(--color-gold)"
             />
           </g>
 

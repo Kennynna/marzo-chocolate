@@ -90,7 +90,7 @@
   font-size: clamp(22px, 3.2vw, 32px);
   letter-spacing: 0.12em;
   fill: var(--color-gold);
-  fill-opacity: 0.85;
+  fill-opacity: 1;
 }
 
 .scroll-frames__zoom-brand {
@@ -98,7 +98,7 @@
   font-size: clamp(52px, 11vw, 88px);
   letter-spacing: 0.28em;
   fill: var(--color-gold);
-  fill-opacity: 0.95;
+  fill-opacity: 1;
 }
 
 .scroll-frames--reduced .scroll-frames__zoom {
