@@ -40,17 +40,24 @@ export function AboutSection() {
       <div className="about__grid">
         <div className="about__visual" ref={visualRef}>
           <div className="about__photo about__photo--main frame-brackets" data-reveal>
-            <MediaImage src={media.aboutHero} alt={ui.alt.aboutHero} priority />
+            <MediaImage src={media.aboutHero} alt={ui.alt.aboutHero} />
           </div>
           <div className="about__photo about__photo--secondary frame-brackets" data-reveal>
-            <MediaImage src={media.aboutSecondary} alt={ui.alt.aboutSecondary} priority />
+            <MediaImage src={media.aboutSecondary} alt={ui.alt.aboutSecondary} />
           </div>
           <div className="about__photo about__photo--tertiary frame-brackets" data-reveal>
-            <MediaImage src={media.aboutTertiary} alt={ui.alt.aboutTertiary} priority />
+            <MediaImage src={media.aboutTertiary} alt={ui.alt.aboutTertiary} />
           </div>
           <div className="about__ornaments" aria-hidden>
             {media.ornaments.map((src, i) => (
-              <img key={src} className={`about__ornament about__ornament--${i + 1}`} src={src} alt="" />
+              <img
+                key={src}
+                className={`about__ornament about__ornament--${i + 1}`}
+                src={src}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             ))}
           </div>
         </div>

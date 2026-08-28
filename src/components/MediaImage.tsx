@@ -2,7 +2,7 @@ type MediaImageProps = {
   src: string
   alt: string
   className?: string
-  /** Высокий приоритет сети (первые фото после Hero). */
+  /** Высокий приоритет сети (Welcome и первый экран). */
   priority?: boolean
 }
 

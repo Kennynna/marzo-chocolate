@@ -10,7 +10,7 @@ export function Hero() {
   const hintRef = useRef<HTMLDivElement>(null)
   const { scrollCue, ui } = useSite()
 
-  const { loadProgress, ready } = useScrollFrameSection({
+  const { loadProgress } = useScrollFrameSection({
     sequence: heroFrames,
     scrollTriggerId: 'hero-frames',
     sectionRef,
@@ -36,7 +36,7 @@ export function Hero() {
         <canvas className="scroll-frames__canvas" ref={canvasRef} aria-hidden />
         <div className="scroll-frames__shade scroll-frames__shade--hero" aria-hidden />
 
-        {!ready && loadProgress < 100 && (
+        {loadProgress < 100 && (
           <div className="scroll-frames__loader" aria-hidden>
             <span
               className="scroll-frames__loader-bar"

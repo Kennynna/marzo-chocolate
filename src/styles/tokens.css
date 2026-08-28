@@ -1,6 +1,6 @@
 /* Токены с текущей версии marzochocolate.ru, снимок 2026-08-23 */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Tenor+Sans&subset=latin,cyrillic&display=swap');
+@import './fonts.css';
 
 :root {
   --color-cream: #e7dfcc;

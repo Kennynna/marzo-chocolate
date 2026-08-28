@@ -17,13 +17,38 @@ export function getLastFramePath(sequence: FrameSequence) {
   return sequence.getPath(sequence.count - 1)
 }
 
+export type FrameProgressHandler = (
+  loaded: number,
+  total: number,
+  frames: HTMLImageElement[],
+) => void
+
+function isPaintReady(img: HTMLImageElement | undefined) {
+  return Boolean(img?.complete && img.naturalWidth)
+}
+
+/** Ближайший уже скачанный кадр — чтобы скролл не ждал всю последовательность. */
+export function pickLoadedFrame(frames: HTMLImageElement[], index: number) {
+  if (isPaintReady(frames[index])) return frames[index]
+
+  for (let delta = 1; delta < frames.length; delta += 1) {
+    const prev = frames[index - delta]
+    if (isPaintReady(prev)) return prev
+    const next = frames[index + delta]
+    if (isPaintReady(next)) return next
+  }
+
+  return undefined
+}
+
 export async function preloadFrames(
   sequence: FrameSequence,
-  onProgress?: (loaded: number, total: number) => void,
+  onProgress?: FrameProgressHandler,
+  frames: HTMLImageElement[] = new Array(sequence.count),
 ): Promise<HTMLImageElement[]> {
   const { count, getPath } = sequence
-  const frames: HTMLImageElement[] = new Array(count)
-  const batchSize = 16
+  const batchSize = 24
+  let loaded = 0
 
   for (let start = 0; start < count; start += batchSize) {
     const end = Math.min(start + batchSize, count)
@@ -35,14 +60,19 @@ export async function preloadFrames(
           img.decoding = 'async'
           img.onload = () => {
             frames[index] = img
+            loaded += 1
+            onProgress?.(loaded, count, frames)
             resolve()
           }
-          img.onerror = () => resolve()
+          img.onerror = () => {
+            loaded += 1
+            onProgress?.(loaded, count, frames)
+            resolve()
+          }
           img.src = getPath(index)
         })
       }),
     )
-    onProgress?.(end, count)
   }
 
   return frames
@@ -50,7 +80,8 @@ export async function preloadFrames(
 
 type FrameJob = {
   promise: Promise<HTMLImageElement[]>
-  listeners: Array<(loaded: number, total: number) => void>
+  frames: HTMLImageElement[]
+  listeners: FrameProgressHandler[]
   loaded: number
 }
 
@@ -59,30 +90,38 @@ const frameJobs = new Map<string, FrameJob>()
 /** Одна загрузка на последовательность: бут-лоадер и секции делят один кэш. */
 export function enqueueFramePreload(
   sequence: FrameSequence,
-  onProgress?: (loaded: number, total: number) => void,
+  onProgress?: FrameProgressHandler,
 ): Promise<HTMLImageElement[]> {
   const key = sequence.getPath(0)
   let job = frameJobs.get(key)
 
   if (!job) {
+    const frames: HTMLImageElement[] = new Array(sequence.count)
     const listeners: FrameJob['listeners'] = []
-    const promise = preloadFrames(sequence, (loaded, total) => {
-      const current = frameJobs.get(key)
-      if (current) current.loaded = loaded
-      listeners.forEach((fn) => fn(loaded, total))
-    }).then((frames) => {
-      const current = frameJobs.get(key)
-      if (current) current.loaded = sequence.count
-      return frames
+    const created: FrameJob = {
+      promise: Promise.resolve(frames),
+      frames,
+      listeners,
+      loaded: 0,
+    }
+    frameJobs.set(key, created)
+    created.promise = preloadFrames(
+      sequence,
+      (loaded, total, current) => {
+        created.loaded = loaded
+        listeners.forEach((fn) => fn(loaded, total, current))
+      },
+      frames,
+    ).then((result) => {
+      created.loaded = sequence.count
+      return result
     })
-
-    job = { promise, listeners, loaded: 0 }
-    frameJobs.set(key, job)
+    job = created
   }
 
   if (onProgress) {
     job.listeners.push(onProgress)
-    if (job.loaded > 0) onProgress(job.loaded, sequence.count)
+    if (job.loaded > 0) onProgress(job.loaded, sequence.count, job.frames)
   }
 
   return job.promise
@@ -132,8 +171,8 @@ export function drawFrameAtProgress(
 
   if (lastIndexRef && lastIndexRef.current === index) return
 
-  const frame = frames[index]
-  if (!frame?.complete || !frame.naturalWidth) return
+  const frame = pickLoadedFrame(frames, index)
+  if (!frame) return
 
   if (lastIndexRef) lastIndexRef.current = index
 

@@ -32,7 +32,7 @@ export function GiftsScrollSection() {
   const maskId = `gifts-zoom-mask-${uid}`;
   const baseId = `gifts-zoom-base-${uid}`;
 
-  const { loadProgress, ready } = useScrollFrameSection({
+  const { loadProgress } = useScrollFrameSection({
     sequence: giftsScrollFrames,
     scrollTriggerId: "gifts-scroll-frames",
     sectionRef,
@@ -44,6 +44,7 @@ export function GiftsScrollSection() {
     fadeHint: false,
     scrub: true,
     zoomFrom: 1.06,
+    loadWhenNear: true,
     zoomMask: {
       svgRef: zoomSvgRef,
       shapeRef: zoomShapeRef,
@@ -153,7 +154,7 @@ export function GiftsScrollSection() {
           </g>
         </svg>
 
-        {!ready && loadProgress < 100 && (
+        {loadProgress < 100 && (
           <div className="scroll-frames__loader" aria-hidden>
             <span
               className="scroll-frames__loader-bar"

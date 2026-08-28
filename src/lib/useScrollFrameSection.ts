@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from './gsap'
-import { preloadSiteImages } from './preloadSiteImages'
+import { whenCriticalReady } from './preloadSiteImages'
 import { scheduleScrollRefresh } from './scheduleScrollRefresh'
 import {
   drawFrameAtProgress,
@@ -55,6 +55,8 @@ type ScrollFrameConfig = {
   fadeHint?: boolean
   contentFadeEnd?: string
   hintFadeEnd?: string
+  /** Не качать последовательность, пока секция не близко к вьюпорту */
+  loadWhenNear?: boolean
 }
 
 const isMobileViewport = () => window.innerWidth < 960
@@ -103,6 +105,7 @@ export function useScrollFrameSection({
   fadeHint = true,
   contentFadeEnd = '+=24%',
   hintFadeEnd = '+=10%',
+  loadWhenNear = false,
 }: ScrollFrameConfig) {
   const posterPath = getLastFramePath(sequence)
   const gate = zoomMask ? Math.min(Math.max(zoomMask.gateRatio ?? 0.32, 0), 0.9) : 0
@@ -110,39 +113,91 @@ export function useScrollFrameSection({
   const progressRef = useRef(0)
   const lastFrameRef = useRef(-1)
   const [loadProgress, setLoadProgress] = useState(0)
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) {
-      setReady(true)
-      return
+    if (reduced) return
+
+    const section = sectionRef.current
+    let cancelled = false
+    let nearObserver: IntersectionObserver | undefined
+    let paintFrame = 0
+
+    const paintLoaded = () => {
+      const canvas = canvasRef.current
+      if (!canvas) return
+      const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true })
+      if (!ctx) return
+
+      lastFrameRef.current = -1
+      drawFrameAtProgress(
+        ctx,
+        framesRef.current,
+        toFrameProgress(toStageProgress(progressRef.current, gate), holdEndRatio),
+        canvas.clientWidth,
+        canvas.clientHeight,
+        lastFrameRef,
+      )
     }
 
-    let cancelled = false
-
-    void preloadSiteImages()
-      .then(() => {
-        if (cancelled) return undefined
-        return enqueueFramePreload(sequence, (loaded, total) => {
-          if (!cancelled) setLoadProgress(Math.round((loaded / total) * 100))
+    const startPreload = () => {
+      const schedulePaint = () => {
+        if (paintFrame) return
+        paintFrame = requestAnimationFrame(() => {
+          paintFrame = 0
+          if (!cancelled) paintLoaded()
         })
-      })
-      .then((frames) => {
+      }
+
+      void enqueueFramePreload(sequence, (loaded, total, frames) => {
+        if (cancelled) return
+        framesRef.current = frames
+        setLoadProgress(Math.round((loaded / total) * 100))
+        if (loaded >= 1) setReady(true)
+        schedulePaint()
+      }).then((frames) => {
         if (cancelled || !frames) return
-        framesRef.current = frames.filter(Boolean)
+        framesRef.current = frames
         setReady(true)
         setLoadProgress(100)
-
-        const st = ScrollTrigger.getById(scrollTriggerId)
-        progressRef.current = st?.progress ?? 0
+        paintLoaded()
         scheduleScrollRefresh()
       })
+    }
+
+    const waitUntilNear = () =>
+      new Promise<void>((resolve) => {
+        if (!loadWhenNear || !section) {
+          resolve()
+          return
+        }
+
+        nearObserver = new IntersectionObserver(
+          ([entry]) => {
+            if (!entry?.isIntersecting) return
+            nearObserver?.disconnect()
+            resolve()
+          },
+          { rootMargin: '180% 0px' },
+        )
+        nearObserver.observe(section)
+      })
+
+    void (loadWhenNear ? waitUntilNear() : whenCriticalReady()).then(() => {
+      if (!cancelled) startPreload()
+    })
 
     return () => {
       cancelled = true
+      nearObserver?.disconnect()
+      if (paintFrame) cancelAnimationFrame(paintFrame)
     }
-  }, [sequence, scrollTriggerId])
+  }, [sequence, scrollTriggerId, sectionRef, canvasRef, loadWhenNear, gate, holdEndRatio])
 
   useGSAP(
     () => {

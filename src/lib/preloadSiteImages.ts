@@ -1,20 +1,11 @@
-import { locales, media } from '../content/site'
+import { media } from '../content/site'
+import { heroFrames } from './scrollFrames'
 
 /**
- * Все фото лендинга — грузим до кадров Hero, чтобы секции не «вспыхивали».
- * Пути к товарным фото не зависят от языка, поэтому читаем их из базовой локали.
+ * Только то, без чего нельзя снять лоадер: фото Welcome и первый кадр Hero.
+ * Остальные фото секций грузит браузер по мере появления в вёрстке.
  */
-export const siteImageUrls: string[] = [
-  media.logo,
-  media.welcome,
-  media.aboutHero,
-  media.aboutSecondary,
-  media.aboutTertiary,
-  media.privateLabel,
-  ...media.ornaments,
-  ...locales.ru.bars.map((bar) => bar.image),
-  ...locales.ru.gifts.map((gift) => gift.image),
-]
+export const criticalImageUrls: string[] = [media.welcome, heroFrames.getPath(0)]
 
 function loadOne(src: string): Promise<void> {
   return new Promise((resolve) => {
@@ -30,15 +21,15 @@ function loadOne(src: string): Promise<void> {
 
 let pending: Promise<void> | null = null
 
-export function preloadSiteImages(
+export function preloadCriticalImages(
   onProgress?: (loaded: number, total: number) => void,
 ): Promise<void> {
   if (!pending) {
-    const total = siteImageUrls.length
+    const total = criticalImageUrls.length
     let loaded = 0
 
     pending = Promise.all(
-      siteImageUrls.map((src) =>
+      criticalImageUrls.map((src) =>
         loadOne(src).then(() => {
           loaded += 1
           onProgress?.(loaded, total)
@@ -46,5 +37,11 @@ export function preloadSiteImages(
       ),
     ).then(() => undefined)
   }
+
   return pending
+}
+
+/** Hero не стартует 296 кадров, пока не готовы критичные фото — иначе они дерутся за сеть. */
+export function whenCriticalReady() {
+  return pending ?? Promise.resolve()
 }

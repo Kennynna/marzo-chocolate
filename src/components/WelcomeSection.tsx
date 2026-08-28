@@ -193,6 +193,8 @@ export function WelcomeSection() {
                   className="welcome__photo"
                   src={media.welcome}
                   alt=""
+                  width={1052}
+                  height={716}
                   decoding="async"
                   fetchPriority="high"
                   initial={reduced ? undefined : { scale: 1.16 }}
