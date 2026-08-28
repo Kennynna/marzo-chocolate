@@ -1,12 +1,14 @@
+import { useSite } from '../lib/language'
 import './Marquee.css'
 
 type MarqueeProps = {
-  items: readonly string[]
+  source: 'brand' | 'collection'
   variant?: 'dark' | 'light' | 'gold'
 }
 
-export function Marquee({ items, variant = 'dark' }: MarqueeProps) {
-  const line = items.join(' · ') + ' · '
+export function Marquee({ source, variant = 'dark' }: MarqueeProps) {
+  const { marquee } = useSite()
+  const line = marquee[source].join(' · ') + ' · '
   const track = line + line
 
   return (

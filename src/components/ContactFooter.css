@@ -60,13 +60,15 @@
 }
 
 .site-footer__block a,
+.site-footer__block button,
 .site-footer__text {
   font-size: var(--fs-small);
   color: var(--color-ink);
   line-height: var(--lh-body);
 }
 
-.site-footer__block a:hover {
+.site-footer__block a:hover,
+.site-footer__block button:hover {
   color: var(--color-cocoa);
 }
 
@@ -74,9 +76,20 @@
   white-space: pre-line;
 }
 
-.site-footer__order {
-  margin-top: 8px;
-  letter-spacing: 0.04em;
+.site-footer__block .site-footer__order {
+  align-self: flex-start;
+  margin-top: 12px;
+  padding: 11px 22px;
+  border: 1px solid var(--color-cocoa);
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.06em;
+  color: var(--color-cocoa);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.site-footer__block .site-footer__order:hover {
+  background: var(--color-cocoa);
+  color: var(--color-cream);
 }
 
 .site-footer__muted {

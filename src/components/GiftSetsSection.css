@@ -132,16 +132,13 @@
   align-items: center;
 }
 
-.gifts__cta,
-.gifts__details {
-  font-size: var(--fs-small);
-  letter-spacing: 0.06em;
-}
-
 .gifts__cta {
+  display: inline-flex;
   padding: 11px 20px;
   border: 1px solid var(--color-cocoa);
   border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  letter-spacing: 0.06em;
   color: var(--color-cocoa);
   transition: background 0.3s ease, color 0.3s ease;
 }
@@ -149,10 +146,6 @@
 .gifts__cta:hover {
   background: var(--color-cocoa);
   color: var(--color-cream);
-}
-
-.gifts__details {
-  color: var(--color-ink-muted);
 }
 
 .gifts__all {
@@ -190,6 +183,11 @@
 
   .gifts__name {
     min-height: auto;
+  }
+
+  .gifts__cta {
+    width: 100%;
+    justify-content: center;
   }
 
   .gifts__all {

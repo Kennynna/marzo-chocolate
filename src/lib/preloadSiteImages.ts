@@ -1,6 +1,9 @@
-import { bars, gifts, media } from '../content/site'
+import { locales, media } from '../content/site'
 
-/** Все фото лендинга — грузим до кадров Hero, чтобы секции не «вспыхивали». */
+/**
+ * Все фото лендинга — грузим до кадров Hero, чтобы секции не «вспыхивали».
+ * Пути к товарным фото не зависят от языка, поэтому читаем их из базовой локали.
+ */
 export const siteImageUrls: string[] = [
   media.logo,
   media.welcome,
@@ -9,8 +12,8 @@ export const siteImageUrls: string[] = [
   media.aboutTertiary,
   media.privateLabel,
   ...media.ornaments,
-  ...bars.map((bar) => bar.image),
-  ...gifts.map((gift) => gift.image),
+  ...locales.ru.bars.map((bar) => bar.image),
+  ...locales.ru.gifts.map((gift) => gift.image),
 ]
 
 function loadOne(src: string): Promise<void> {

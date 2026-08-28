@@ -1,10 +1,11 @@
 import { useRef } from 'react'
-import { brand, media } from '../content/site'
 import { gsap, useGSAP } from '../lib/gsap'
+import { useSite } from '../lib/language'
 import './VideoBanner.css'
 
 export function VideoBanner() {
   const ref = useRef<HTMLElement>(null)
+  const { brand, media, ui } = useSite()
 
   useGSAP(
     () => {
@@ -28,7 +29,7 @@ export function VideoBanner() {
   )
 
   return (
-    <section className="video-banner" ref={ref} aria-label="Видео о фабрике MARZO">
+    <section className="video-banner" ref={ref} aria-label={ui.aria.video}>
       <video
         className="video-banner__video"
         src={media.video}
@@ -40,7 +41,7 @@ export function VideoBanner() {
       />
       <div className="video-banner__caption">
         <p>{brand.name}</p>
-        <span>производство · Грозный · Чеченская Республика</span>
+        <span>{ui.videoCaption}</span>
       </div>
     </section>
   )

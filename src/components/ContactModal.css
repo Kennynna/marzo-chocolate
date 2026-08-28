@@ -1,0 +1,317 @@
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(22, 30, 5, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: contact-modal-in 0.26s ease forwards;
+}
+
+.contact-modal--closing {
+  animation: contact-modal-out 0.26s ease forwards;
+}
+
+.contact-modal__dialog {
+  position: relative;
+  width: min(900px, 100%);
+  max-height: calc(100svh - 48px);
+  overflow-y: auto;
+  padding: 72px 72px 56px;
+  border-radius: 44px;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  text-align: center;
+  box-shadow: 0 32px 80px rgba(18, 24, 4, 0.35);
+  animation: contact-dialog-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.contact-modal--closing .contact-modal__dialog {
+  animation: contact-dialog-out 0.22s ease forwards;
+}
+
+.contact-modal__dialog:focus {
+  outline: none;
+}
+
+.contact-modal__close {
+  position: absolute;
+  top: 32px;
+  right: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.contact-modal__close:hover {
+  color: var(--color-cocoa);
+  transform: rotate(90deg);
+}
+
+.contact-modal__close svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.contact-modal__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5.4vw, 62px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+}
+
+.contact-modal__lead {
+  max-width: 40ch;
+  margin: 24px auto 0;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-body);
+  color: var(--color-ink-muted);
+  text-wrap: balance;
+}
+
+.contact-modal__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 44px;
+}
+
+.contact-modal__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(460px, 100%);
+  min-height: 78px;
+  padding: 12px 28px;
+  border: 1px solid rgba(140, 74, 44, 0.28);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3.2vw, 34px);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: var(--color-cocoa);
+  word-break: break-word;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-modal__action:hover {
+  background: rgba(140, 74, 44, 0.08);
+  border-color: var(--color-cocoa);
+}
+
+.contact-modal__action--primary {
+  border-color: var(--color-cocoa);
+  background: var(--color-cocoa);
+  color: var(--color-cream);
+}
+
+.contact-modal__action--primary:hover {
+  background: var(--color-cocoa-deep);
+  border-color: var(--color-cocoa-deep);
+  color: var(--color-cream);
+}
+
+.contact-modal__hours {
+  margin-top: 44px;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.contact-modal__hours-label {
+  margin-bottom: 4px;
+  color: var(--color-cocoa);
+  opacity: 0.7;
+}
+
+.contact-modal__hours-value {
+  white-space: pre-line;
+}
+
+.contact-modal__ornament {
+  position: absolute;
+  bottom: 28px;
+  width: 96px;
+  height: auto;
+  fill: none;
+  stroke: var(--color-cocoa);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.contact-modal__ornament--left {
+  left: 40px;
+}
+
+.contact-modal__ornament--right {
+  right: 40px;
+  transform: scaleX(-1);
+}
+
+@keyframes contact-modal-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contact-modal-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes contact-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes contact-dialog-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+@media (max-width: 960px) {
+  .contact-modal__dialog {
+    padding: 56px 40px 48px;
+    border-radius: 36px;
+  }
+
+  .contact-modal__ornament {
+    width: 72px;
+    bottom: 22px;
+  }
+
+  .contact-modal__ornament--left {
+    left: 24px;
+  }
+
+  .contact-modal__ornament--right {
+    right: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-modal {
+    padding: 16px;
+    align-items: flex-end;
+  }
+
+  .contact-modal__dialog {
+    max-height: calc(100svh - 32px);
+    padding: 48px 20px 92px;
+    border-radius: 28px;
+  }
+
+  .contact-modal__close {
+    top: 16px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .contact-modal__close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-modal__title {
+    font-size: clamp(24px, 8vw, 34px);
+    letter-spacing: 0.02em;
+  }
+
+  .contact-modal__lead {
+    margin-top: 16px;
+    font-size: var(--fs-small);
+  }
+
+  .contact-modal__actions {
+    margin-top: 32px;
+    gap: 12px;
+  }
+
+  .contact-modal__action {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px 16px;
+    font-size: clamp(17px, 5.4vw, 24px);
+  }
+
+  .contact-modal__hours {
+    margin-top: 32px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .contact-modal__ornament {
+    width: 56px;
+    bottom: 24px;
+  }
+
+  .contact-modal__ornament--left {
+    left: 16px;
+  }
+
+  .contact-modal__ornament--right {
+    right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-modal,
+  .contact-modal--closing,
+  .contact-modal__dialog,
+  .contact-modal--closing .contact-modal__dialog {
+    animation: none;
+  }
+
+  .contact-modal__close:hover {
+    transform: none;
+  }
+}
+
+html.is-modal-open,
+html.is-modal-open body {
+  overflow: hidden;
+}

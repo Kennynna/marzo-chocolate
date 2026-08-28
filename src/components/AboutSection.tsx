@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { aboutFeatures, brand, cta, hero, media } from '../content/site'
 import { gsap, useGSAP } from '../lib/gsap'
+import { useSite } from '../lib/language'
 import { useReveal } from '../lib/useReveal'
 import { MediaImage } from './MediaImage'
 import { ScrollOrnamentBand } from './ScrollOrnamentBand'
@@ -9,6 +9,7 @@ import './AboutSection.css'
 export function AboutSection() {
   const ref = useReveal({ stagger: 0.12 })
   const visualRef = useRef<HTMLDivElement>(null)
+  const { aboutFeatures, brand, cta, hero, media, ui } = useSite()
 
   useGSAP(
     () => {
@@ -33,19 +34,19 @@ export function AboutSection() {
   return (
     <section className="about" id="about" ref={ref}>
       <ScrollOrnamentBand tone="dark" tilt="diagonal-down" />
-      <span className="section-rail">01 · о фабрике</span>
+      <span className="section-rail">{ui.rails.about}</span>
       <span className="section-watermark about__watermark">{brand.name}</span>
 
       <div className="about__grid">
         <div className="about__visual" ref={visualRef}>
           <div className="about__photo about__photo--main frame-brackets" data-reveal>
-            <MediaImage src={media.aboutHero} alt="Фабрика MARZO" priority />
+            <MediaImage src={media.aboutHero} alt={ui.alt.aboutHero} priority />
           </div>
           <div className="about__photo about__photo--secondary frame-brackets" data-reveal>
-            <MediaImage src={media.aboutSecondary} alt="Производство шоколада MARZO" priority />
+            <MediaImage src={media.aboutSecondary} alt={ui.alt.aboutSecondary} priority />
           </div>
           <div className="about__photo about__photo--tertiary frame-brackets" data-reveal>
-            <MediaImage src={media.aboutTertiary} alt="Шоколад MARZO" priority />
+            <MediaImage src={media.aboutTertiary} alt={ui.alt.aboutTertiary} priority />
           </div>
           <div className="about__ornaments" aria-hidden>
             {media.ornaments.map((src, i) => (

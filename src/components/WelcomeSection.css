@@ -57,7 +57,7 @@
   pointer-events: none;
 }
 
-/* Пословица: висячая кавычка в левом поле, top отбит от фиксированной шапки */
+/* Пословица: стеклянная карточка с висячей кавычкой, top отбит от фиксированной шапки */
 .welcome__proverb {
   position: absolute;
   top: clamp(92px, 12vh, 126px);
@@ -66,20 +66,54 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 8px;
   max-width: min(40ch, 36vw);
-  padding-left: clamp(22px, 2.2vw, 34px);
+  padding: clamp(18px, 1.7vw, 26px) clamp(22px, 2vw, 30px);
+  padding-left: clamp(46px, 4vw, 62px);
+  border: 1px solid rgba(236, 193, 131, 0.2);
+  border-radius: 2px 20px 20px 2px;
+  background: linear-gradient(
+    148deg,
+    rgba(236, 193, 131, 0.13) 0%,
+    rgba(140, 74, 44, 0.12) 48%,
+    rgba(18, 24, 4, 0.3) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(247, 229, 196, 0.16),
+    0 0 46px rgba(236, 193, 131, 0.1),
+    0 28px 64px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px) saturate(1.35);
+  -webkit-backdrop-filter: blur(16px) saturate(1.35);
+}
+
+/* Золотая закладка по левой кромке стекла */
+.welcome__proverb::after {
+  content: '';
+  position: absolute;
+  top: clamp(14px, 1.4vw, 22px);
+  bottom: clamp(14px, 1.4vw, 22px);
+  left: -1px;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, var(--color-gold) 50%, transparent 100%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .welcome__proverb {
+    background: linear-gradient(148deg, rgba(38, 46, 16, 0.94) 0%, rgba(18, 24, 4, 0.9) 100%);
+  }
 }
 
 .welcome__proverb-quote {
   position: absolute;
-  top: -0.3em;
-  left: 0;
+  top: clamp(4px, 0.7vw, 10px);
+  left: clamp(18px, 1.6vw, 24px);
   font-family: var(--font-display);
   font-size: clamp(40px, 3.8vw, 60px);
   line-height: 1;
   color: var(--color-gold);
-  opacity: 0.32;
+  opacity: 0.38;
   pointer-events: none;
 }
 
@@ -99,11 +133,12 @@
 }
 
 .welcome__proverb-translation {
-  padding-top: 8px;
-  border-top: 1px solid var(--gold-line);
+  align-self: stretch;
+  padding-top: 9px;
+  border-top: 1px solid rgba(236, 193, 131, 0.28);
   font-size: 13px;
   line-height: 1.38;
-  color: rgba(231, 223, 204, 0.58);
+  color: rgba(231, 223, 204, 0.66);
 }
 
 .welcome__proverb-source {
@@ -119,8 +154,8 @@
   height: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  /* Верхнее поле держит блок пословицы над заголовком */
-  padding: clamp(196px, 26vh, 248px) clamp(34px, 6vw, 84px) clamp(56px, 7vh, 84px);
+  /* Верхнее поле держит стеклянный блок пословицы над заголовком */
+  padding: clamp(228px, 29vh, 280px) clamp(34px, 6vw, 84px) clamp(56px, 7vh, 84px);
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   align-items: center;
@@ -307,12 +342,14 @@
     top: 84px;
     left: 26px;
     right: 26px;
-    gap: 5px;
+    gap: 6px;
     max-width: none;
-    padding-left: 20px;
+    padding: 16px 20px 16px 44px;
   }
 
   .welcome__proverb-quote {
+    top: 4px;
+    left: 16px;
     font-size: 38px;
   }
 
@@ -320,7 +357,7 @@
     grid-template-columns: 1fr;
     align-content: center;
     gap: 26px;
-    padding: clamp(176px, 22vh, 206px) 26px 48px;
+    padding: clamp(200px, 25vh, 230px) 26px 48px;
   }
 
   .welcome__copy {

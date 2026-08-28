@@ -1,4 +1,5 @@
-import { bars, collectionSection, cta, links } from '../content/site'
+import { useContactModal } from '../lib/contactModal'
+import { useSite } from '../lib/language'
 import { useReveal } from '../lib/useReveal'
 import { MediaImage } from './MediaImage'
 import { ScrollOrnamentBand } from './ScrollOrnamentBand'
@@ -6,16 +7,18 @@ import './ProductShowcase.css'
 
 export function ProductShowcase() {
   const ref = useReveal({ stagger: 0.12, y: 48 })
+  const contactModal = useContactModal()
+  const { bars, collectionSection, cta, links, ui } = useSite()
 
   return (
-    <section className="showcase" id="product" ref={ref}>
+    <section className="showcase" id={collectionSection.id} ref={ref}>
       <ScrollOrnamentBand tilt="diagonal-up" />
-      <span className="section-rail showcase__rail">02 · коллекция</span>
+      <span className="section-rail showcase__rail">{ui.rails.collection}</span>
       <span className="ghost-number showcase__ghost-bg">03</span>
 
       <div className="showcase__intro">
         <p className="showcase__eyebrow" data-reveal>
-          коллекция
+          {ui.eyebrows.collection}
         </p>
         <h2 className="showcase__title" data-reveal>
           {collectionSection.title}
@@ -42,16 +45,17 @@ export function ProductShowcase() {
               <h3 className="showcase__name">{bar.title}</h3>
               <p className="showcase__name-en">{bar.titleEn}</p>
               <p className="showcase__ingredients">
-                <span>Состав</span>
+                <span>{ui.ingredientsLabel}</span>
                 {bar.ingredients}
               </p>
               <div className="showcase__actions">
-                <a className="showcase__cta" href="#contact">
+                <button
+                  type="button"
+                  className="u-button-reset showcase__cta"
+                  onClick={contactModal.open}
+                >
                   {cta.order}
-                </a>
-                <a className="showcase__details" href={bar.href}>
-                  {cta.details}
-                </a>
+                </button>
               </div>
             </div>
           </article>

@@ -11,6 +11,21 @@ body::after {
   background-size: 180px 180px;
 }
 
+/* Кнопка, которая должна выглядеть как ссылка-CTA. Правила ниже перекрываются стилями компонентов. */
+.u-button-reset {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
 .section-rail {
   position: absolute;
   top: 120px;

@@ -167,12 +167,6 @@
   color: var(--color-cream);
 }
 
-.showcase__details {
-  font-size: var(--fs-small);
-  color: var(--color-ink-muted);
-  letter-spacing: 0.04em;
-}
-
 .showcase__catalog {
   display: inline-flex;
   margin-top: 72px;

@@ -2,6 +2,19 @@ import { useEffect } from 'react'
 import Lenis from 'lenis'
 import { gsap, ScrollTrigger } from './gsap'
 
+let activeLenis: Lenis | null = null
+
+/**
+ * Пауза плавного скролла для оверлеев. При prefers-reduced-motion Lenis не создаётся,
+ * и вызов ничего не делает — блокировка страницы остаётся на CSS.
+ */
+export function setSmoothScrollPaused(paused: boolean) {
+  if (!activeLenis) return
+
+  if (paused) activeLenis.stop()
+  else activeLenis.start()
+}
+
 /**
  * Lenis крутится через GSAP ticker. Без scrollerProxy —
  * иначе ScrollTrigger.update + proxy на каждый кадр едят CPU.
@@ -20,6 +33,7 @@ export function useSmoothScroll() {
       smoothWheel: true,
     })
 
+    activeLenis = lenis
     lenis.on('scroll', ScrollTrigger.update)
 
     const onTick = (time: number) => {
@@ -35,6 +49,7 @@ export function useSmoothScroll() {
     return () => {
       gsap.ticker.remove(onTick)
       lenis.destroy()
+      activeLenis = null
     }
   }, [])
 }

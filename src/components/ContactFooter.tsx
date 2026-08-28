@@ -1,9 +1,12 @@
-import { brand, contacts, cta, footer } from '../content/site'
+import { useContactModal } from '../lib/contactModal'
+import { useSite } from '../lib/language'
 import { useReveal } from '../lib/useReveal'
 import './ContactFooter.css'
 
 export function ContactFooter() {
   const ref = useReveal({ stagger: 0.1 })
+  const contactModal = useContactModal()
+  const { brand, contacts, cta, footer, ui } = useSite()
 
   return (
     <footer className="site-footer" id={contacts.id} ref={ref}>
@@ -19,12 +22,16 @@ export function ContactFooter() {
 
         <div className="site-footer__columns">
           <div className="site-footer__block" data-reveal>
-            <p className="site-footer__label">контакты</p>
+            <p className="site-footer__label">{ui.contactsLabel}</p>
             <a href={`tel:${contacts.phone.replace(/\s/g, '')}`}>{contacts.phone}</a>
             <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
-            <a className="site-footer__order" href="#contact">
+            <button
+              type="button"
+              className="u-button-reset site-footer__order"
+              onClick={contactModal.open}
+            >
               {cta.contact}
-            </a>
+            </button>
           </div>
 
           <div className="site-footer__block" data-reveal>
@@ -65,9 +72,9 @@ export function ContactFooter() {
           <p>{brand.legalName}</p>
           <p>{brand.shortLegalName}</p>
           <p>
-            ОГРН {brand.ogrn}
+            {brand.ogrnLabel} {brand.ogrn}
             <br />
-            ИНН {brand.inn}
+            {brand.innLabel} {brand.inn}
           </p>
         </div>
 

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { scrollCue } from '../content/site'
+import { useSite } from '../lib/language'
 import { heroFrames } from '../lib/scrollFrames'
 import { useScrollFrameSection } from '../lib/useScrollFrameSection'
 import './ScrollFrameSection.css'
@@ -8,6 +8,7 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const hintRef = useRef<HTMLDivElement>(null)
+  const { scrollCue, ui } = useSite()
 
   const { loadProgress, ready } = useScrollFrameSection({
     sequence: heroFrames,
@@ -29,7 +30,7 @@ export function Hero() {
       className={`scroll-frames${reduced ? ' scroll-frames--reduced' : ''}`}
       id="hero"
       ref={sectionRef}
-      aria-label="Главный экран"
+      aria-label={ui.aria.hero}
     >
       <div className="scroll-frames__stage">
         <canvas className="scroll-frames__canvas" ref={canvasRef} aria-hidden />

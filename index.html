@@ -180,7 +180,7 @@
     >
       <div class="boot__inner">
         <div class="boot__mark" id="boot-mark">MARZO</div>
-        <div class="boot__tagline">шоколадная фабрика</div>
+        <div class="boot__tagline" id="boot-tagline">шоколадная фабрика</div>
 
         <div class="boot__bar" id="boot-bar">
           <div class="boot__fill"></div>
@@ -189,7 +189,7 @@
         </div>
 
         <div class="boot__meta">
-          <span>загрузка</span>
+          <span id="boot-loading">загрузка</span>
           <span class="boot__pct" id="boot-pct">0%</span>
         </div>
       </div>
@@ -204,6 +204,34 @@
         var pct = document.getElementById('boot-pct')
         var mark = document.getElementById('boot-mark')
         if (!boot || !bar || !pct || !mark) return
+
+        // Лоадер рисуется до бандла, поэтому язык определяем тем же порядком, что и lib/language.ts
+        var BOOT_COPY = {
+          ru: { tagline: 'шоколадная фабрика', loading: 'загрузка', aria: 'Загрузка сайта MARZO' },
+          en: { tagline: 'chocolate factory', loading: 'loading', aria: 'Loading the MARZO site' },
+        }
+
+        var lang = 'ru'
+        try {
+          var stored = window.localStorage.getItem('marzo:lang')
+          lang =
+            stored === 'ru' || stored === 'en'
+              ? stored
+              : (navigator.language || 'ru').toLowerCase().indexOf('ru') === 0
+                ? 'ru'
+                : 'en'
+        } catch (e) {
+          lang = 'ru'
+        }
+
+        var copy = BOOT_COPY[lang]
+        document.documentElement.lang = lang
+        boot.setAttribute('aria-label', copy.aria)
+
+        var tagline = document.getElementById('boot-tagline')
+        var loading = document.getElementById('boot-loading')
+        if (tagline) tagline.textContent = copy.tagline
+        if (loading) loading.textContent = copy.loading
 
         // Логотип проявляем только с готовым Tenor Sans, иначе видна подмена
         // системного фолбэка на веб-шрифт (font-display: swap)

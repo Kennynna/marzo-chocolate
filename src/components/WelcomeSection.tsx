@@ -1,8 +1,8 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
-import { brand, media, proverb, welcome } from '../content/site'
 import { useBootReady } from '../lib/bootLoader'
 import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap'
+import { useSite } from '../lib/language'
 import { REVEAL_EASE } from '../lib/motion'
 import { FiligreeOrnament } from './FiligreeOrnament'
 import { Reveal, RevealWords } from './Reveal'
@@ -12,6 +12,8 @@ import './WelcomeSection.css'
 const AURA_FADE = 0.75
 const CIRCLE_CLOSED = 'circle(0% at 50% 52%)'
 const CIRCLE_OPEN = 'circle(120% at 50% 52%)'
+/** Полная длина стартового каскада: после неё задержки сбрасываются */
+const INTRO_MS = 2200
 
 export function WelcomeSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -20,8 +22,20 @@ export function WelcomeSection() {
   const visualRef = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
   const booted = useBootReady()
+  const { brand, media, proverb, ui, welcome } = useSite()
   /** Появление стартует только когда лоадер ушёл, иначе каскад играет вслепую */
   const play = booted || Boolean(reduced)
+  const [introDone, setIntroDone] = useState(false)
+
+  useEffect(() => {
+    if (!play || introDone) return
+
+    const timer = window.setTimeout(() => setIntroDone(true), INTRO_MS)
+    return () => window.clearTimeout(timer)
+  }, [play, introDone])
+
+  /** Смена языка перемонтирует слова заголовка — стартовые задержки к ней уже не относятся */
+  const stage = (delay: number) => (introDone ? 0 : delay)
 
   useGSAP(
     () => {
@@ -65,7 +79,7 @@ export function WelcomeSection() {
       className="welcome"
       id="welcome"
       ref={sectionRef}
-      aria-label="Приветствие MARZO"
+      aria-label={ui.aria.welcome}
     >
       <div className="welcome__stage" ref={stageRef}>
         <motion.div
@@ -90,7 +104,7 @@ export function WelcomeSection() {
             className="welcome__proverb"
             immediate
             play={play}
-            delay={AURA_FADE + 0.28}
+            delay={stage(AURA_FADE + 0.28)}
             y={12}
             duration={0.6}
           >
@@ -108,7 +122,7 @@ export function WelcomeSection() {
                 className="welcome__eyebrow"
                 immediate
                 play={play}
-                delay={AURA_FADE + 0.08}
+                delay={stage(AURA_FADE + 0.08)}
                 y={12}
                 duration={0.5}
               >
@@ -122,7 +136,7 @@ export function WelcomeSection() {
                   text={brand.name}
                   immediate
                   play={play}
-                  delay={AURA_FADE + 0.14}
+                  delay={stage(AURA_FADE + 0.14)}
                   duration={0.7}
                 />
                 <RevealWords
@@ -130,7 +144,7 @@ export function WelcomeSection() {
                   text={welcome.title}
                   immediate
                   play={play}
-                  delay={AURA_FADE + 0.24}
+                  delay={stage(AURA_FADE + 0.24)}
                   duration={0.6}
                   stagger={0.04}
                 />
@@ -140,7 +154,7 @@ export function WelcomeSection() {
                 className="welcome__filigree"
                 immediate
                 play={play}
-                delay={AURA_FADE + 0.4}
+                delay={stage(AURA_FADE + 0.4)}
                 y={8}
                 duration={0.6}
               >
@@ -156,7 +170,7 @@ export function WelcomeSection() {
                     animate={reduced || !play ? undefined : { opacity: 1, y: 0 }}
                     transition={{
                       duration: 0.45,
-                      delay: AURA_FADE + 0.46 + index * 0.07,
+                      delay: stage(AURA_FADE + 0.46 + index * 0.07),
                       ease: REVEAL_EASE,
                     }}
                   >
@@ -192,7 +206,7 @@ export function WelcomeSection() {
                 className="welcome__caption"
                 immediate
                 play={play}
-                delay={AURA_FADE + 0.56}
+                delay={stage(AURA_FADE + 0.56)}
                 y={10}
                 duration={0.5}
               >
@@ -205,7 +219,7 @@ export function WelcomeSection() {
             className="welcome__cue"
             immediate
             play={play}
-            delay={AURA_FADE + 0.66}
+            delay={stage(AURA_FADE + 0.66)}
             y={0}
             duration={0.6}
           >

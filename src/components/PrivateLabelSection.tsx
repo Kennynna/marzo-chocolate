@@ -1,4 +1,5 @@
-import { cta, media, privateLabel } from '../content/site'
+import { useContactModal } from '../lib/contactModal'
+import { useSite } from '../lib/language'
 import { useReveal } from '../lib/useReveal'
 import { MediaImage } from './MediaImage'
 import { ScrollOrnamentBand } from './ScrollOrnamentBand'
@@ -6,17 +7,19 @@ import './PrivateLabelSection.css'
 
 export function PrivateLabelSection() {
   const ref = useReveal({ stagger: 0.12 })
+  const contactModal = useContactModal()
+  const { cta, media, privateLabel, ui } = useSite()
 
   return (
     <section className="private-label" id={privateLabel.id} ref={ref}>
       <ScrollOrnamentBand tilt={-31} />
-      <span className="section-rail private-label__rail">04 · b2b</span>
+      <span className="section-rail private-label__rail">{ui.rails.privateLabel}</span>
       <div className="private-label__band" aria-hidden />
 
       <div className="private-label__grid">
         <div className="private-label__content">
           <p className="private-label__eyebrow" data-reveal>
-            для бизнеса
+            {ui.eyebrows.privateLabel}
           </p>
           <h2 className="private-label__title" data-reveal>
             {privateLabel.title}
@@ -27,14 +30,19 @@ export function PrivateLabelSection() {
           <p className="private-label__text" data-reveal>
             {privateLabel.description}
           </p>
-          <a className="private-label__cta" href="#contact" data-reveal>
+          <button
+            type="button"
+            className="u-button-reset private-label__cta"
+            onClick={contactModal.open}
+            data-reveal
+          >
             {cta.createBrand}
-          </a>
+          </button>
         </div>
 
         <div className="private-label__visual frame-brackets" data-reveal>
           <MediaImage src={media.privateLabel} alt={privateLabel.title} />
-          <span className="private-label__stamp">your brand</span>
+          <span className="private-label__stamp">{privateLabel.stamp}</span>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import { useId, useRef } from "react";
-import { giftsSection, scrollCue } from "../content/site";
+import { useSite } from "../lib/language";
 import { giftsScrollFrames } from "../lib/scrollFrames";
 import { useScrollFrameSection } from "../lib/useScrollFrameSection";
 import "./ScrollFrameSection.css";
@@ -26,6 +26,7 @@ export function GiftsScrollSection() {
   const zoomShapeRef = useRef<SVGGElement>(null);
   const zoomFillRef = useRef<SVGGElement>(null);
   const zoomCaptionRef = useRef<SVGGElement>(null);
+  const { giftsSection, scrollCue, ui } = useSite();
 
   const uid = useId().replace(/:/g, "");
   const maskId = `gifts-zoom-mask-${uid}`;
@@ -65,7 +66,7 @@ export function GiftsScrollSection() {
       className={`scroll-frames${reduced ? " scroll-frames--reduced" : ""}`}
       id="gifts-scroll"
       ref={sectionRef}
-      aria-label="Подарочные наборы — видео"
+      aria-label={ui.aria.giftsScroll}
     >
       <div className="scroll-frames__stage" ref={stageRef}>
         <div className="scroll-frames__poster" aria-hidden />

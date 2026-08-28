@@ -10,31 +10,34 @@ import { PrivateLabelSection } from './components/PrivateLabelSection'
 import { DistributorsSection } from './components/DistributorsSection'
 import { VideoBanner } from './components/VideoBanner'
 import { ContactFooter } from './components/ContactFooter'
-import { marquee } from './content/marquee'
+import { ContactModalProvider } from './components/ContactModalProvider'
+import { LanguageProvider } from './components/LanguageProvider'
 import { useSmoothScroll } from './lib/useSmoothScroll'
 
 function App() {
   useSmoothScroll()
 
   return (
-    <>
-      <Header />
-      <main>
-        <WelcomeSection />
-        <Hero />
-        <Marquee items={marquee.brand} variant="gold" />
-        <AboutSection />
-        <Marquee items={marquee.collection} variant="light" />
-        <ProductShowcase />
-        <GiftSetsSection />
-        <PrivateLabelSection />
-        <DistributorsSection />
-        <Marquee items={marquee.brand} variant="dark" />
-        <VideoBanner />
-        <GiftsScrollSection />
-      </main>
-      <ContactFooter />
-    </>
+    <LanguageProvider>
+      <ContactModalProvider>
+        <Header />
+        <main>
+          <WelcomeSection />
+          <Hero />
+          <Marquee source="brand" variant="gold" />
+          <AboutSection />
+          <Marquee source="collection" variant="light" />
+          <ProductShowcase />
+          <GiftSetsSection />
+          <PrivateLabelSection />
+          <DistributorsSection />
+          <Marquee source="brand" variant="dark" />
+          <VideoBanner />
+          <GiftsScrollSection />
+        </main>
+        <ContactFooter />
+      </ContactModalProvider>
+    </LanguageProvider>
   )
 }
 
