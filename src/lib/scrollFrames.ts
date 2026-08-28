@@ -127,6 +127,13 @@ export function enqueueFramePreload(
   return job.promise
 }
 
+/** Поля 16:9 на узком экране. Совпадает с --color-cream */
+export const FRAME_LETTERBOX = '#e7dfcc'
+
+function isMobileFrameLayout() {
+  return typeof window !== 'undefined' && window.innerWidth < 960
+}
+
 function paintFrameCover(
   ctx: CanvasRenderingContext2D,
   img: HTMLImageElement,
@@ -137,7 +144,15 @@ function paintFrameCover(
   const ih = img.naturalHeight
   if (!iw || !ih) return
 
-  const scale = Math.max(width / iw, height / ih)
+  const letterbox = isMobileFrameLayout()
+  if (letterbox) {
+    ctx.fillStyle = FRAME_LETTERBOX
+    ctx.fillRect(0, 0, width, height)
+  }
+
+  const scale = letterbox
+    ? Math.min(width / iw, height / ih)
+    : Math.max(width / iw, height / ih)
   const dw = iw * scale
   const dh = ih * scale
   const dx = (width - dw) / 2

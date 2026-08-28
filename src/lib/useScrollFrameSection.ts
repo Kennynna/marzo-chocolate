@@ -6,6 +6,7 @@ import {
   drawFrameAtProgress,
   drawFrameCover,
   enqueueFramePreload,
+  FRAME_LETTERBOX,
   getLastFramePath,
   type FrameSequence,
 } from './scrollFrames'
@@ -250,6 +251,10 @@ export function useScrollFrameSection({
         canvas.height = Math.floor(canvas.clientHeight * dpr)
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
         lastFrameRef.current = -1
+        if (isMobileViewport()) {
+          ctx.fillStyle = FRAME_LETTERBOX
+          ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight)
+        }
         paint(progressRef.current)
       }
 
@@ -414,8 +419,9 @@ export function useScrollFrameSection({
         gsap.set(hintRef.current, { opacity: 1, clearProps: 'opacity' })
       }
 
-      // Этап 2: основная анимация стартует ровно там, где закончился zoom
-      gsap.set(canvas, { scale: zoomFrom, force3D: true })
+      // На мобилке кадр contain: стартовый zoom обрезал бы бока 16:9
+      const zoomStart = isMobileViewport() ? 1 : zoomFrom
+      gsap.set(canvas, { scale: zoomStart, force3D: true })
       timeline.to(canvas, { scale: 1, force3D: true, duration: 1 - gate }, gate)
 
       scheduleScrollRefresh()

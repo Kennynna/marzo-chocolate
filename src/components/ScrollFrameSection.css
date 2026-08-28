@@ -238,6 +238,26 @@
 }
 
 @media (max-width: 960px) {
+  .scroll-frames,
+  .scroll-frames__stage,
+  .pin-spacer.scroll-frames__pin-spacer {
+    background-color: var(--color-cream);
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .scroll-frames__poster {
+    background-color: var(--color-cream);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: none;
+  }
+
+  .scroll-frames__shade--hero,
+  .scroll-frames__shade--gifts {
+    display: none;
+  }
+
   .scroll-frames__content,
   .scroll-frames__content--center {
     inset: auto 20px 14%;
