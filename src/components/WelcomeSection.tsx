@@ -118,17 +118,6 @@ export function WelcomeSection() {
 
           <div className="welcome__inner">
             <div className="welcome__copy" ref={copyRef}>
-              <Reveal
-                className="welcome__eyebrow"
-                immediate
-                play={play}
-                delay={stage(AURA_FADE + 0.08)}
-                y={12}
-                duration={0.5}
-              >
-                <span className="welcome__eyebrow-rule" aria-hidden />
-                {welcome.eyebrow}
-              </Reveal>
 
               <h1 className="welcome__heading">
                 <RevealWords

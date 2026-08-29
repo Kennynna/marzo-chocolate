@@ -170,15 +170,6 @@
   will-change: transform, opacity;
 }
 
-.welcome__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: var(--fs-caption);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-gold-deep);
-}
 
 .welcome__eyebrow-rule {
   width: clamp(26px, 5vw, 54px);
@@ -343,7 +334,7 @@
     left: 26px;
     right: 26px;
     gap: 6px;
-    max-width: none;
+    max-width: max-content;
     padding: 16px 20px 16px 44px;
   }
 
