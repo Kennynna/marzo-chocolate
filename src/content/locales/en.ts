@@ -49,7 +49,7 @@ export const en: SiteContent = {
   },
 
   cta: {
-    contact: 'get in touch →',
+    contact: 'get in touch ',
     contactUs: 'contact us →',
     collection: 'collection →',
     allCollection: 'full collection →',

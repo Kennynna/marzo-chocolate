@@ -48,7 +48,7 @@ export const ru = {
   },
 
   cta: {
-    contact: 'связаться →',
+    contact: 'связаться',
     contactUs: 'связаться с нами →',
     collection: 'коллекция →',
     allCollection: 'вся коллекция →',

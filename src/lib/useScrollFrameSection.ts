@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type RefObject } from 'react'
+import { useEffect, useMemo, useRef, useState, type RefObject } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from './gsap'
 import { whenCriticalReady } from './preloadSiteImages'
 import { scheduleScrollRefresh } from './scheduleScrollRefresh'
@@ -8,6 +8,7 @@ import {
   enqueueFramePreload,
   FRAME_LETTERBOX,
   getLastFramePath,
+  resolveFrameSequence,
   type FrameSequence,
 } from './scrollFrames'
 
@@ -108,7 +109,8 @@ export function useScrollFrameSection({
   hintFadeEnd = '+=10%',
   loadWhenNear = false,
 }: ScrollFrameConfig) {
-  const posterPath = getLastFramePath(sequence)
+  const playback = useMemo(() => resolveFrameSequence(sequence), [sequence])
+  const posterPath = getLastFramePath(playback)
   const gate = zoomMask ? Math.min(Math.max(zoomMask.gateRatio ?? 0.32, 0), 0.9) : 0
   const framesRef = useRef<HTMLImageElement[]>([])
   const progressRef = useRef(0)
@@ -155,7 +157,7 @@ export function useScrollFrameSection({
         })
       }
 
-      void enqueueFramePreload(sequence, (loaded, total, frames) => {
+      void enqueueFramePreload(playback, (loaded, total, frames) => {
         if (cancelled) return
         framesRef.current = frames
         setLoadProgress(Math.round((loaded / total) * 100))
@@ -198,7 +200,7 @@ export function useScrollFrameSection({
       nearObserver?.disconnect()
       if (paintFrame) cancelAnimationFrame(paintFrame)
     }
-  }, [sequence, scrollTriggerId, sectionRef, canvasRef, loadWhenNear, gate, holdEndRatio])
+  }, [playback, scrollTriggerId, sectionRef, canvasRef, loadWhenNear, gate, holdEndRatio])
 
   useGSAP(
     () => {

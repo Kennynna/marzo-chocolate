@@ -17,6 +17,31 @@ export function getLastFramePath(sequence: FrameSequence) {
   return sequence.getPath(sequence.count - 1)
 }
 
+const MOBILE_FRAME_MAX_WIDTH = 960
+const MOBILE_FRAME_STEP = 2
+
+/** Равномерная прореживание: первый и последний кадры остаются. */
+export function subsampleFrameSequence(sequence: FrameSequence, step: number): FrameSequence {
+  if (step <= 1) return sequence
+
+  const count = Math.ceil(sequence.count / step)
+  return {
+    count,
+    getPath: (index) => {
+      const t = count <= 1 ? 0 : index / (count - 1)
+      return sequence.getPath(Math.round(t * (sequence.count - 1)))
+    },
+  }
+}
+
+/** На телефоне грузим вдвое меньше кадров — скролл-анимация та же, запросов меньше. */
+export function resolveFrameSequence(sequence: FrameSequence): FrameSequence {
+  if (typeof window === 'undefined' || window.innerWidth >= MOBILE_FRAME_MAX_WIDTH) {
+    return sequence
+  }
+  return subsampleFrameSequence(sequence, MOBILE_FRAME_STEP)
+}
+
 export type FrameProgressHandler = (
   loaded: number,
   total: number,
@@ -92,7 +117,7 @@ export function enqueueFramePreload(
   sequence: FrameSequence,
   onProgress?: FrameProgressHandler,
 ): Promise<HTMLImageElement[]> {
-  const key = sequence.getPath(0)
+  const key = `${sequence.getPath(0)}#${sequence.count}`
   let job = frameJobs.get(key)
 
   if (!job) {

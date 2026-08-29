@@ -335,7 +335,7 @@
 
 @media (max-width: 960px) {
   .welcome__stage {
-    --arch-h: min(34vh, 320px);
+    --arch-h: min(25vh, 320px);
   }
 
   .welcome__proverb {

@@ -6,7 +6,7 @@ import './index.css'
 import App from './App.tsx'
 import { finishBoot, setBootProgress } from './lib/bootLoader'
 import { preloadCriticalImages } from './lib/preloadSiteImages'
-import { enqueueFramePreload, heroFrames } from './lib/scrollFrames'
+import { enqueueFramePreload, heroFrames, resolveFrameSequence } from './lib/scrollFrames'
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -17,7 +17,7 @@ const criticalReady = preloadCriticalImages((loaded, total) => {
 
 void criticalReady.then(() => {
   requestAnimationFrame(finishBoot)
-  if (!reducedMotion) void enqueueFramePreload(heroFrames)
+  if (!reducedMotion) void enqueueFramePreload(resolveFrameSequence(heroFrames))
 })
 
 createRoot(document.getElementById('root')!).render(
