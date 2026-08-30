@@ -95,8 +95,8 @@ export const ru = {
     {
       id: 'milk-hazelnut',
       number: '01',
-      title: 'Молочный шоколад с цельным фундуком',
-      titleEn: 'milk chocolate with funduk',
+      title: 'Молочный шоколад с дроблеными фисташками',
+      titleEn: 'milk chocolate with crushed pistachios',
       image: '/vkus-1.webp',
       ingredients:
         'сахар, масло какао, молоко сухое цельное, какао тёртое, сухая молочная сыворотка, эмульгатор лецитин соевый, порошок ванили, фундук',
@@ -104,8 +104,8 @@ export const ru = {
     {
       id: 'milk-pistachio',
       number: '02',
-      title: 'Молочный шоколад с дроблеными фисташками',
-      titleEn: 'milk chocolate with crushed pistachios',
+      title: 'Молочный шоколад',
+      titleEn: 'milk chocolate',
       image: '/vkus-2.webp',
       ingredients:
         'сахар, масло какао, молоко сухое цельное, сухая молочная сыворотка, эмульгатор лецитин соевый, ароматизатор натуральный ванилин, фисташка',
@@ -113,8 +113,8 @@ export const ru = {
     {
       id: 'milk-chocolate',
       number: '03',
-      title: 'Молочный шоколад',
-      titleEn: 'milk chocolate',
+      title: 'Молочный шоколад с цельным фундуком',
+      titleEn: 'milk chocolate with whole hazelnuts',
       image: '/vkus-3.webp',
       ingredients:
         'сахар, масло какао, молоко сухое цельное, какао тёртое, молоко сухое обезжиренное, сухая молочная сыворотка, эмульгатор (лецитин соевый), порошок ванили',

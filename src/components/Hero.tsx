@@ -45,11 +45,9 @@ export function Hero() {
           </div>
         )}
 
-        {!reduced && (
           <div className="scroll-frames__scroll-hint" ref={hintRef} aria-hidden>
             <span>{scrollCue.label}</span>
           </div>
-        )}
       </div>
     </section>
   )

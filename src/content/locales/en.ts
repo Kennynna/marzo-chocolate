@@ -94,8 +94,8 @@ export const en: SiteContent = {
     {
       id: 'milk-hazelnut',
       number: '01',
-      title: 'Milk chocolate with whole hazelnuts',
-      titleEn: 'молочный шоколад с фундуком',
+      title: 'Milk chocolate with crushed pistachios',
+      titleEn: 'молочный шоколад с дроблеными фисташками',
       image: '/vkus-1.webp',
       ingredients:
         'sugar, cocoa butter, whole milk powder, cocoa mass, dry whey, soy lecithin emulsifier, vanilla powder, hazelnuts',
@@ -103,8 +103,8 @@ export const en: SiteContent = {
     {
       id: 'milk-pistachio',
       number: '02',
-      title: 'Milk chocolate with crushed pistachios',
-      titleEn: 'молочный шоколад с фисташками',
+      title: 'Milk chocolate',
+      titleEn: 'молочный шоколад',
       image: '/vkus-2.webp',
       ingredients:
         'sugar, cocoa butter, whole milk powder, dry whey, soy lecithin emulsifier, natural vanillin flavouring, pistachios',
@@ -112,8 +112,8 @@ export const en: SiteContent = {
     {
       id: 'milk-chocolate',
       number: '03',
-      title: 'Milk chocolate',
-      titleEn: 'молочный шоколад',
+      title: 'Milk chocolate with whole hazelnuts',
+      titleEn: 'молочный шоколад с цельным фундуком',
       image: '/vkus-3.webp',
       ingredients:
         'sugar, cocoa butter, whole milk powder, cocoa mass, skimmed milk powder, dry whey, emulsifier (soy lecithin), vanilla powder',

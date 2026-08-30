@@ -57,6 +57,8 @@ export function AboutSection() {
                 alt=""
                 loading="lazy"
                 decoding="async"
+                draggable={false}
+                onContextMenu={(event) => event.preventDefault()}
               />
             ))}
           </div>

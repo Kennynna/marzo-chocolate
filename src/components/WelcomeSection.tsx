@@ -186,6 +186,8 @@ export function WelcomeSection() {
                   height={716}
                   decoding="async"
                   fetchPriority="high"
+                  draggable={false}
+                  onContextMenu={(event) => event.preventDefault()}
                   initial={reduced ? undefined : { scale: 1.16 }}
                   animate={reduced || !play ? undefined : { scale: 1 }}
                   transition={{ duration: 1.4, delay: AURA_FADE + 0.12, ease: REVEAL_EASE }}

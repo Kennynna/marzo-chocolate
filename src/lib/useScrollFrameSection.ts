@@ -407,13 +407,13 @@ export function useScrollFrameSection({
       if (fadeHint && hintRef?.current) {
         gsap.set(hintRef.current, { opacity: 1 })
         const hintTween = gsap.to(hintRef.current, {
-          opacity: 0,
           ease: 'none',
           scrollTrigger: {
             trigger: section,
             start: 'top top',
             end: hintFadeEnd,
             scrub: true,
+            
           },
         })
         cleanups.push(() => hintTween.scrollTrigger?.kill())
